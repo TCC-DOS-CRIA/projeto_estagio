@@ -4,6 +4,8 @@ import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/home/home.dart';
 
+import '../Cadastro/Cadastro.dart';
+
 class LoginPage extends StatelessWidget {
 
   final formKey = GlobalKey<FormState>();
@@ -162,7 +164,7 @@ class LoginPage extends StatelessWidget {
                     InkWell(
                       child: Text('Clique aqui para se cadastrar',style: TextStyle(fontSize: 15),),
                       onTap: ()=> Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => Home(),)
+                      builder: (context) => Cadastro(),)
                     )
               ),
                   ],

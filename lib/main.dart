@@ -6,6 +6,6 @@ import 'package:projeto_estagio/splash/splash_page.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: EsqueceuSenha(),
+    home: SplashPage(),
   ));
 }
