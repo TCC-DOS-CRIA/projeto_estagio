@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
+import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
+import 'package:projeto_estagio/home/home.dart';
 
 class LoginPage extends StatelessWidget {
 
+  final formKey = GlobalKey<FormState>();
+  final emailKey = GlobalKey<FormFieldState>();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +27,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: 128,
               height: 60,
-              child: Text('Bem Vindo!',textAlign: TextAlign.left,style: TextStyle(fontSize: 35,fontWeight: FontWeight.w400),),
+              child: Text('Ola!',textAlign: TextAlign.left,style: TextStyle(fontSize: 35,fontWeight: FontWeight.w400),),
             ),
             SizedBox(
               height: 10,
@@ -34,9 +41,15 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            TextFormField(
+            Form(
+              key: formKey,
+              child:Column(children: [
+              TextFormField(
+                controller: _emailController,
+                key: emailKey,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                icon: Icon(Icons.email),
                 labelText: "E-mail",
                 labelStyle: TextStyle(
                   color: Colors.black45,
@@ -45,14 +58,23 @@ class LoginPage extends StatelessWidget {
                 )
               ),
               style: TextStyle(fontSize: 20),
+              validator: (String ?value){
+                if(value == null || value.isEmpty){
+                  return 'E-mail é obrigatório';
+                }else{
+                  return null;
+                }
+              },
             ),
             SizedBox(
               height: 10,
             ),
             TextFormField(
+              controller: _passwordController,
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: InputDecoration(
+                icon: Icon(Icons.key),
                 labelText: "Senha",
                 labelStyle: TextStyle(
                   color: Colors.black45,
@@ -61,27 +83,46 @@ class LoginPage extends StatelessWidget {
                 )
               ),
               style: TextStyle(fontSize: 20),
+              validator: (String ?value){
+                if(value == null || value.isEmpty){
+                  return 'Senha é obrigatória';
+                }
+                return null;
+              }
             ),
             SizedBox(
               height: 20,
             ),
             SizedBox(
               height: 90,
-              width: 100,
+              width: 300,
               child: Container(
-              height: 40,
-              width: 100,
+              height: 100,
+              width: 300,
               alignment: Alignment.center,
               child: ElevatedButton(
-                  onPressed: (){},
-                  
-                  child: const Text('Entrar',style: TextStyle(fontSize: 17),),
+                  onPressed: () async{
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    if(formKey.currentState!.validate()){
+                      bool deuCerto = await Integracoes.realizarLogin(_emailController.text, _passwordController.text);
+                      if(!currentFocus.hasPrimaryFocus){
+                        currentFocus.unfocus();
+                      }
+                      if(deuCerto){
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => Home(),));
+                          _emailController.clear();
+                          _passwordController.clear();
+                      }
+                    }
+                  },
+                  child: Text('Entrar',style: TextStyle(fontSize: 17),),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)
                     ),
-                  
-                    padding: EdgeInsets.only(left: 120,right:120,top: 23,bottom: 23 )
+                      elevation: 20,
+                     minimumSize: Size(250,50),
                   ),
                   
                 ),
@@ -92,20 +133,26 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(
               child: Center(
-                child: InkWell(
-                
+                child: TextButton(
                 child: Text('Esqueceu a senha?',style: TextStyle(fontSize: 18),),
-                 onTap: ()=> Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => EsqueceuSenha(),)
-                )
+                 onPressed: (){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> EsqueceuSenha()));
+                   
+                 }
+                
               ),
               )
             ),
+              ],) 
+            
+            ),
+            
+            
             SizedBox(
-              height: 170,
+              height: 150,
             ),
             Container(
-              width: 200,
+              width: 170,
               alignment: Alignment.bottomLeft,
               child: Column(children: [
                 Container(
@@ -115,7 +162,7 @@ class LoginPage extends StatelessWidget {
                     InkWell(
                       child: Text('Clique aqui para se cadastrar',style: TextStyle(fontSize: 15),),
                       onTap: ()=> Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => EsqueceuSenha(),)
+                      builder: (context) => Home(),)
                     )
               ),
                   ],
