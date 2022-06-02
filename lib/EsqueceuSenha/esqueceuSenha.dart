@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/home/home.dart';
+import 'package:projeto_estagio/login/login.dart';
 class EsqueceuSenha extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -16,7 +17,8 @@ class EsqueceuSenha extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: ()=>Navigator.pop(context,false),
+          onPressed: ()=>Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => LoginPage(),)),
         ),
       ),
       body: Container(
@@ -47,8 +49,8 @@ class EsqueceuSenha extends StatelessWidget {
           key: formKey,  
           child: Column(children: [
             Container(
-            height: 60,
-            width: 280,
+            height: 70,
+            width: 300,
             child:TextFormField(
               keyboardType: TextInputType.emailAddress,
               controller: _emailController,
@@ -82,21 +84,33 @@ class EsqueceuSenha extends StatelessWidget {
                   onPressed: () async{
                     FocusScope.of(context).requestFocus(new FocusNode());
                     if(formKey.currentState!.validate()){
-                      String resposta = await Integracoes.recuperaSenha(_emailController.text);
+                      int resposta = await Integracoes.recuperaSenha(_emailController.text);
+                      String texto ="";
+                      switch(resposta){
+                        case 0 :
+                          texto = "Email não cadastrado";
+                          break;
+                        case 1:
+                          texto="Email enviado com sucesso";
+                          break;
+                        case -1:
+                          texto="Erro ao enviar email";
+                          break;
+                      }
                       ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                      content: Text(resposta),
+                      content: Text(texto),
                       action: SnackBarAction(
                       label: "",
                       onPressed: () {
-                        // Code to execute.
+                        
                       },
                       )
                       )
                       );
-                      Future.delayed(Duration(milliseconds: 3000), () {
+                      Future.delayed(Duration(seconds: 1), () {
                         Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Home(),));
+                          builder: (context) => LoginPage(),));
                           _emailController.clear();
                     });
                     };

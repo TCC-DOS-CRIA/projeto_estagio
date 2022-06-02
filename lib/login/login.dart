@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:projeto_estagio/Cadastro/CadastroDeNovaSenha.dart';
 import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/home/home.dart';
@@ -104,18 +105,78 @@ class LoginPage extends StatelessWidget {
               alignment: Alignment.center,
               child: ElevatedButton(
                   onPressed: () async{
+                    FocusScope.of(context).unfocus();
                     FocusScopeNode currentFocus = FocusScope.of(context);
                     if(formKey.currentState!.validate()){
-                      bool deuCerto = await Integracoes.realizarLogin(_emailController.text, _passwordController.text);
+                      int deuCerto = await Integracoes.realizarLogin(_emailController.text, _passwordController.text);
                       if(!currentFocus.hasPrimaryFocus){
                         currentFocus.unfocus();
                       }
-                      if(deuCerto){
-                        Navigator.push(context, MaterialPageRoute(
+                      switch(deuCerto){
+                        case 1 :
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                          content: Text("Login realizado com sucesso"),
+                          action: SnackBarAction(
+                          label: "",
+                          onPressed: () {
+                          },
+                          )
+                          )
+                          );
+                          Future.delayed(Duration(seconds: 1), () {
+                          Navigator.push(context, MaterialPageRoute(
                           builder: (context) => Home(),));
                           _emailController.clear();
                           _passwordController.clear();
-                      }
+                          });
+                          break;
+                        case 0 :
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                          content: Text("Email ou senha inválidos"),
+                          action: SnackBarAction(
+                          label: "",
+                          onPressed: () {
+                          },
+                          )
+                          )
+                          );
+                          break;
+                    
+                        case -1 :
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                          content: Text("Redirecionando para cadastro de nova senha"),
+                          action: SnackBarAction(
+                          label: "",
+                          onPressed: () {
+                          },
+                          )
+                          )
+                          );
+                          Future.delayed(Duration(seconds: 1), () {
+                          Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => new CadastroDeNovaSenha(email: _emailController.text,formKey: GlobalKey<FormState>(),confirmaSenha: TextEditingController(),senha: TextEditingController(),)));
+                          
+                          });
+                          break;
+                        case -2:
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                          content: Text("Erro ao autenticar usuário"),
+                          action: SnackBarAction(
+                          label: "",
+                          onPressed: () {
+                          },
+                          )
+                          )
+                          );
+                          break;
+                    
+                        }
+                      
+
                     }
                   },
                   child: Text('Entrar',style: TextStyle(fontSize: 17),),
@@ -138,7 +199,8 @@ class LoginPage extends StatelessWidget {
                 child: TextButton(
                 child: Text('Esqueceu a senha?',style: TextStyle(fontSize: 18),),
                  onPressed: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> EsqueceuSenha()));
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => EsqueceuSenha(),));
                    
                  }
                 
@@ -151,7 +213,7 @@ class LoginPage extends StatelessWidget {
             
             
             SizedBox(
-              height: 150,
+              height: 200,
             ),
             Container(
               width: 170,
@@ -160,9 +222,9 @@ class LoginPage extends StatelessWidget {
                 Container(
                   alignment: Alignment.bottomLeft,
                   child: Row(children: [
-                    Text('Não possui conta?',style: TextStyle(fontSize: 15,color: Colors.black45),),
+                    Text('Não possui conta?',style: TextStyle(fontSize: 13,color: Colors.black45),),
                     InkWell(
-                      child: Text('Clique aqui para se cadastrar',style: TextStyle(fontSize: 15),),
+                      child: Text('Clique aqui para se cadastrar',style: TextStyle(fontSize: 13),),
                       onTap: ()=> Navigator.push(context, MaterialPageRoute(
                       builder: (context) => Cadastro(),)
                     )

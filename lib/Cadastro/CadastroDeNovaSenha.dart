@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/login/login.dart';
 
-class Cadastro extends StatelessWidget {
-  final _emailController = TextEditingController();
-  final _nomeController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+class CadastroDeNovaSenha extends StatelessWidget {
 
-  final formKey = GlobalKey<FormState>();
+   final  email;
+    final formKey;
+    final senha;
+    final confirmaSenha; 
+  
+   const CadastroDeNovaSenha({ Key? key, this.email,this.formKey,this.senha,this.confirmaSenha}) : super(key: key);
+  
+  
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -20,7 +24,8 @@ class Cadastro extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, size: 35,),
           color: Colors.black,
-          onPressed: ()=>Navigator.pop(context,false),
+          onPressed: ()=>Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => LoginPage(),)),
         ),
       ),
       body: Container(
@@ -32,81 +37,25 @@ class Cadastro extends StatelessWidget {
         child: ListView(
           
           children: <Widget>[
-          
-          
+            SizedBox(height: 40,),
          SizedBox(
               width: 128,
-              height: 60,
-              child: Text('Cadastro',textAlign: TextAlign.left,style: TextStyle(fontSize: 35,fontWeight: FontWeight.w400),),
+              height: 95,
+              child: Text('Cadastrar uma nova senha',textAlign: TextAlign.center,style: TextStyle(fontSize: 35,fontWeight: FontWeight.w400),),
             ),
           SizedBox(height: 20,),
           SizedBox(
-            child: Text("Crie uma nova conta",textAlign: TextAlign.left,style: TextStyle(fontSize: 23,fontWeight: FontWeight.w300)),
-          ),
-          SizedBox(
-            height: 50,
+            height: 20,
           ),
           Form(
-           key: formKey,
+            key: formKey,
           child: Column(children: [
             Container(
-            height: 70,
+            height: 60,
             width: 300,
             alignment: Alignment.centerLeft,
             child:TextFormField(
-              controller: _nomeController,
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                icon: Icon(Icons.person),
-                labelText: "Nome",
-                labelStyle: TextStyle(
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                )
-              ),
-              style: TextStyle(fontSize: 20,),
-              validator: (String ?value){
-                if(value == null || value.isEmpty){
-                  return 'Nome é obrigatória';
-                }
-                return null;
-              }
-            ),),
-            SizedBox(height: 30,),
-            Container(
-            height: 70,
-            width: 300,
-            alignment: Alignment.centerLeft,
-            child:TextFormField(
-              controller: _emailController,
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                icon: Icon(Icons.email),
-                labelText: "Email",
-                labelStyle: TextStyle(
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                )
-              ),
-              style: TextStyle(fontSize: 20,),
-              validator: (String ?value){
-                if(value == null || value.isEmpty){
-                  return 'Email é obrigatória';
-                }
-                return null;
-              }
-            ),),
-          SizedBox(height: 30,),
-            Container(
-            height: 70,
-            width: 300,
-            alignment: Alignment.centerLeft,
-            child:TextFormField(
-              controller: _passwordController,
+              controller: senha,
               textAlign: TextAlign.left,
               keyboardType: TextInputType.text,
               obscureText: true,
@@ -130,11 +79,11 @@ class Cadastro extends StatelessWidget {
             
             SizedBox(height: 30,),
             Container(
-            height: 70,
+            height: 60,
             width: 300,
             alignment: Alignment.centerLeft,
             child:TextFormField(
-              controller: _confirmPasswordController,
+              controller: confirmaSenha,
               textAlign: TextAlign.left,
               keyboardType: TextInputType.text,
               obscureText: true,
@@ -149,8 +98,8 @@ class Cadastro extends StatelessWidget {
               ),
               style: TextStyle(fontSize: 20,),
               validator: (String ?value){
-                if(value == null || value.isEmpty || value.compareTo(_confirmPasswordController.text)!=0){
-                  return 'Confirme a senha';
+                if(value == null || value.isEmpty){
+                  return 'É necessário confirmar a senha';
                 }
                 return null;
               }
@@ -172,31 +121,60 @@ class Cadastro extends StatelessWidget {
               width: 300,
               alignment: Alignment.center,
               child: ElevatedButton(
+                
                   onPressed: () async{
+                    debugPrint(this.email.toString());
+                    debugPrint(this.senha.text);
+                    bool a = false;
                     FocusScope.of(context).unfocus();
                     FocusScopeNode currentFocus = FocusScope.of(context);
                     if(formKey.currentState!.validate()){
-                      if(_passwordController.text.compareTo(_confirmPasswordController.text)==0){
-                        bool a = await Integracoes.cadastroNovoUsuario(_nomeController.text, _emailController.text, _passwordController.text);
+                        if(confirmaSenha.text.compareTo(senha.text)==0){
+                        a = await Integracoes.cadastrarNovaSenha(this.email,this.senha.text);
                         if(a){
-                          ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                          content: Text("Cadastro realizado com sucesso"),
-                          action: SnackBarAction(
-                          label: "",
-                          onPressed: () {
-                          },
-                          )
-                          )
-                          );
-                          Future.delayed(Duration(seconds: 1), () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text("Senha Cadastrada com sucesso"),
+                                action: SnackBarAction(
+                                label: "",
+                                onPressed: () {
+                                },
+                              )
+                            )
+                        );
+                        senha.clear();
+                        confirmaSenha.clear();
+                        Future.delayed(Duration(seconds: 1), () {
                           Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => new LoginPage()));
+                          builder: (context) => LoginPage()));
                           
                           });
-                        }
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text("Problemas ao Cadastrar nova senha"),
+                              action: SnackBarAction(
+                              label: "",
+                              onPressed: () {
+                              },
+                            )
+                          )
+                      );
+                        a=true;
                       }
-                      
+                    }
+                    if(!a){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text("Senhas diferentes"),
+                              action: SnackBarAction(
+                              label: "",
+                              onPressed: () {
+                              },
+                            )
+                          )
+                      );
+                    }
                     }
                     
                   },
