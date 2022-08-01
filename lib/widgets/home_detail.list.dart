@@ -1,0 +1,227 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
+import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
+
+class DetailPage extends StatelessWidget {
+  final _scrollController = ScrollController();
+  var _firstScroll = true;
+  bool _enabled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Compras'),
+            actions: <Widget>[
+              GetBuilder<HomeController>(builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 16.0, top: 8.0),
+                  child: GestureDetector(
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        Icon(
+                          Icons.shopping_cart,
+                          size: 38,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2.0),
+                          child: CircleAvatar(
+                            radius: 8.0,
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            child: Text(
+                              "${_.carrinho.length}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                );
+              })
+            ],
+          ),
+          body: GestureDetector(
+            onVerticalDragUpdate: (details) {
+              if (_enabled && _firstScroll) {
+                _scrollController.jumpTo(
+                    _scrollController.position.pixels - details.delta.dy);
+              }
+            },
+            onVerticalDragEnd: (_) {
+              if (_enabled) _firstScroll = false;
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: _.carrinho == null ? 0 : _.carrinho.length,
+                      itemBuilder: (context, index) {
+                        String key = _.carrinho.keys.elementAt(index);
+                        var quantidade;
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: Container(
+                                        width: 150,
+                                        height: 150,
+                                        child: CachedNetworkImage(
+                                            imageUrl:
+                                                '${'https://app-projetosestagio-api.herokuapp.com/produtos' + _.carrinho[key]!.image}' +
+                                                    '?alt=media',
+                                            fit: BoxFit.cover,
+                                            placeholder: (_, __) {
+                                              return Center(
+                                                  child:
+                                                      CupertinoActivityIndicator(
+                                                radius: 15,
+                                              ));
+                                            }),
+                                      )),
+                                      SizedBox(width: 5),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            '${_.carrinho[key]!.nome.toString()}',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontSize: 20.0),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Container(
+                                                width: 120,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.red[600],
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        blurRadius: 6.0,
+                                                        color: Colors.blue,
+                                                        offset:
+                                                            Offset(0.0, 1.0),
+                                                      )
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(50.0),
+                                                    )),
+                                                margin:
+                                                    EdgeInsets.only(top: 20.0),
+                                                padding: EdgeInsets.all(2.0),
+                                                child: new Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      height: 8.0,
+                                                    ),
+                                                    IconButton(
+                                                      icon: Icon(Icons.remove),
+                                                      onPressed: () {
+                                                        _.decrement(_
+                                                            .carrinho[key]!
+                                                            .quantidade--);
+                                                        _.valorTotal();
+                                                      },
+                                                      color: Colors.yellow,
+                                                    ),
+                                                    Text(
+                                                      "${_.carrinho[key]!.quantidade}",
+                                                      style: TextStyle(
+                                                          fontSize: 16.0),
+                                                    ),
+                                                    IconButton(
+                                                      icon: Icon(Icons.add),
+                                                      onPressed: () {
+                                                        _.increment(_
+                                                            .carrinho[key]!
+                                                            .quantidade++);
+                                                        _.valorTotal();
+                                                      },
+                                                      color: Colors.yellow,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8.0,
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: 38.0,
+                                      ),
+                                      Text(
+                                        '\$ ${_.carrinho[key]!.preco.toInt()}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20.0),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.purple,
+                            )
+                          ],
+                        );
+                      }),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(left: 120),
+                    height: 70,
+                    width: 400,
+                    color: Colors.grey[200],
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Total: \$${_.valorTotal().toInt()}',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
