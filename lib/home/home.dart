@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
+import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
 class Home extends StatefulWidget {
 
   @override
@@ -10,6 +11,21 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text ('pesquisa'),
+        actions: [
+          IconButton(
+            onPressed: (){
+              showSearch(
+                context: context, 
+              delegate: pesquisa(),
+              );
+            }, 
+            icon: Icon(Icons.search_rounded)
+            )
+        ]
+        ),
       body: FutureBuilder<List>(
         future: Integracoes.buscarUsuarios(),
         builder: (context, snapshot){
