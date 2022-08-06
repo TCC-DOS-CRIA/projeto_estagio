@@ -11,27 +11,14 @@ class ProdutoServices {
 
   final _dio = Dio();
 
-  teste() async {
-    var url =
-        Uri.parse('https://app-projetosestagio-api.herokuapp.com/produtos');
-    var response = await http.get(url).then((res) {
-      if (res.statusCode == 200) {
-        Map body = jsonDecode(res.body);
-        debugPrint(body['nome']);
-      } else {
-        throw Exception("Erro ao trazer usuarios");
-      }
-    });
-  }
 
   Future<List<ProdutoModel>> getProdutos() async {
     try {
-      teste();
       final Response response = await this
           ._dio
           .get('https://app-projetosestagio-api.herokuapp.com/produtos');
 
-      return (response.data['data'] as List)
+      return (response.data as List)
           .map((e) => ProdutoModel.fromJson(e))
           .toList();
     } catch (e) {
