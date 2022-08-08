@@ -82,11 +82,12 @@ Padding(
          ),
          ),
        ),
-
-
       ],
      ),
     ),
+    
+    
+    
     Container(
       height: MediaQuery.of(context).size.height/3,
       padding: EdgeInsets.all(38),
@@ -94,14 +95,14 @@ Padding(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
            Column(
             children: <Widget>[
-              Icon(Icons.table_chart, color: Colors.grey,),
-              Text('Leaders',
+              Icon(Icons.notification_important_rounded, color: Colors.black87,),
+              Text('Notificações',
               style: TextStyle(
-                color:Colors.grey,
+                color:Colors.black87,
                 fontWeight: FontWeight.bold
               ),
               )
@@ -109,75 +110,56 @@ Padding(
            ),
            Column(
             children: <Widget>[
-              Icon(Icons.show_chart, color: Colors.grey,),
-              Text('Level up',
+              Icon(Icons.description_outlined, color: Colors.black87,),
+              Text('Meus Dados',
               style: TextStyle(
-                color:Colors.grey,
+                color:Colors.black87,
                 fontWeight: FontWeight.bold
               ),
               )
             ], 
            ),
 
-Column(
+
+            ],
+          ),
+          
+         
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children:<Widget>[
+
+    Column(
             children: <Widget>[
-              Icon(Icons.card_giftcard, color: Colors.grey,),
-              Text('Leaders',
+              Icon(Icons.payment, color: Colors.black87,),
+              Text('Pagamentos',
               style: TextStyle(
-                color:Colors.grey,
+                color:Colors.black87,
                 fontWeight: FontWeight.bold
               ),
               )
             ], 
            ),
-            ],
-          ),
-          Spacer(),
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children:<Widget>[
+           
       Column(
       children: <Widget>[
-        Icon(Icons.code, color: Colors.grey,),
-        Text('QR Code',
+        Icon(Icons.settings, color: Colors.black87),
+        Text('Configurações',
         style:TextStyle(
-          color:Colors.grey,
-          fontWeight: FontWeight.bold
-        ),
-        )
-      ],
-    ),
-      Column(
-      children: <Widget>[
-        Icon(Icons.blur_circular, color: Colors.grey,),
-        Text('Daily Bonus',
-        style:TextStyle(
-          color:Colors.grey,
+          color:Colors.black87,
           fontWeight: FontWeight.bold
         ),
         ),
-      ],
-    ),
-    Column(
-      children: <Widget>[
-        Icon(Icons.visibility, color: Colors.grey,),
-        Text('Visitors',
-        style:TextStyle(
-          color:Colors.grey,
-          fontWeight: FontWeight.bold
-        ),
-        ),
-        
       ],
     ),
   ]
-),
-        ],
+  ),
+    ],
       ),
     )
    ],
   ),
+
  );
 }
-
 }
