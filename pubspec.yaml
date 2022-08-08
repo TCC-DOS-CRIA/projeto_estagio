@@ -30,6 +30,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  js: ^0.6.2
+
+  flutter_session:
+    git:
+      url: https://github.com/RomanIvn/flutter_session.git
+      ref: master
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

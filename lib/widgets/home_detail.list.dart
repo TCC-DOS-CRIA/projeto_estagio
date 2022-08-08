@@ -1,13 +1,21 @@
+import 'package:js/js.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:projeto_estagio/Cadastro/Cadastro.dart';
 import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
+import 'package:projeto_estagio/models/produto_model.dart';
+
+import '../Integracao_api/integracoes_api.dart';
 
 class DetailPage extends StatelessWidget {
   final _scrollController = ScrollController();
   var _firstScroll = true;
   bool _enabled = false;
+  List<ProdutoModel> a = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +95,7 @@ class DetailPage extends StatelessWidget {
                                         height: 150,
                                         child: CachedNetworkImage(
                                             imageUrl:
-                                                '${'https://app-projetosestagio-api.herokuapp.com/produtos' + _.carrinho[key]!.image}' +
-                                                    '?alt=media',
+                                                _.carrinho[key]!.image.toString(),
                                             fit: BoxFit.cover,
                                             placeholder: (_, __) {
                                               return Center(
@@ -216,6 +223,23 @@ class DetailPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Container(
+                        height: 100,
+                        width: 300,
+                        alignment: Alignment.center,
+                        child: ElevatedButton(style: ElevatedButton.styleFrom(
+                          elevation: 3,
+                          padding: EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 20),
+                        ),
+                        onPressed: (){
+                    for (var element in _.produtos) {
+                        if(element.noCarrinho == true){
+                          a.add(element);
+                        }
+                      }
+                    Integracoes.cadastroNovoPedido(a,_.valorTotal().toInt());
+                  }, child: Text("Fazer Pedido")),)
+                  
                 ],
               ),
             ),

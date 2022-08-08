@@ -18,9 +18,9 @@ class ProdutoServices {
           ._dio
           .get('https://app-projetosestagio-api.herokuapp.com/produtos');
 
-      return (response.data as List)
-          .map((e) => ProdutoModel.fromJson(e))
-          .toList();
+      List<ProdutoModel> a = (response.data as List).map((e) => ProdutoModel.fromJson(e)).toList();
+      print(a);
+      return a;
     } catch (e) {
       print(e);
       throw Exception("Erro ao trazer usuarios");

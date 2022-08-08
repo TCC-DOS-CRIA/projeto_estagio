@@ -43,7 +43,7 @@ class HomeController extends GetxController {
     } else {
       this._carrinho.remove(produto.nome);
     }
-    update(['produto', 'listaCarrinho']);
+    update(['produtos', 'carrinho']);
   }
 
   double valorTotal() => produtos.fold<double>(

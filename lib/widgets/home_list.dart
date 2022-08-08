@@ -51,11 +51,13 @@ class HomeList extends StatelessWidget {
                             ),
                           ],
                         ),
-                        onTap: () {
-                          Get.to(DetailPage());
-                        },
+                        onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(),
+                              ),
                       ),
-                    );
+                    ));
                   })
             ],
           ),
@@ -79,9 +81,7 @@ class HomeList extends StatelessWidget {
                           children: [
                             Expanded(
                               child: CachedNetworkImage(
-                                imageUrl:
-                                    '${'https://app-projetosestagio-api.herokuapp.com/produtos' + produto.image.toString()}' +
-                                        '?alt=media',
+                                imageUrl:produto.image.toString(),
                                 fit: BoxFit.cover,
                                 placeholder: (_, __) {
                                   return Center(
@@ -128,8 +128,13 @@ class HomeList extends StatelessWidget {
                                             : Colors.green,
                                       ),
                                       onTap: () {
-                                        _.listaCarrinho(
-                                            index, !produto.noCarrinho);
+                                        if(produto.noCarrinho){
+                                          _.listaCarrinho(
+                                            index, false);
+                                        }else{
+                                          _.listaCarrinho(
+                                            index, true);
+                                        }
                                       },
                                     ),
                                   ),
