@@ -39,7 +39,7 @@ body: Column(
     Container(
       padding: EdgeInsets.only(top:16),
       width:  MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height/2,
+      height: MediaQuery.of(context).size.height/2.5,
       decoration: BoxDecoration(
         color: fundo,
         borderRadius: BorderRadius.only(
@@ -54,9 +54,9 @@ body: Column(
               children:<Widget>[
 
           Padding(
-            padding: EdgeInsets.only(top: 15, bottom: 10),
+            padding: EdgeInsets.only(top: 30, bottom: 10),
             child: CircleAvatar(
-            radius: 65.0,
+            radius: 80.0,
             backgroundImage: NetworkImage(url),
             ),
           ),
@@ -87,73 +87,134 @@ Padding(
     ),
     
     
-    
+   
     Container(
-      height: MediaQuery.of(context).size.height/3,
-      padding: EdgeInsets.all(38),
+      height: MediaQuery.of(context).size.height/2.2,
+      padding: EdgeInsets.all(40),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+
+            Column(
+                children: <Widget>[
+                  Icon(Icons.notification_important_rounded, color: Colors.black, size:26)
+                ], 
+               ),
            Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Icon(Icons.notification_important_rounded, color: Colors.black87,),
               Text('Notificações',
               style: TextStyle(
                 color:Colors.black87,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
+                fontSize: 15
               ),
-              )
-            ], 
-           ),
-           Column(
-            children: <Widget>[
-              Icon(Icons.description_outlined, color: Colors.black87,),
-              Text('Meus Dados',
+              ),
+              Text('Minha central de notificações',
               style: TextStyle(
-                color:Colors.black87,
-                fontWeight: FontWeight.bold
+                color:Colors.grey[400],
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
               ),
               )
             ], 
            ),
 
+         Column(
+                children: <Widget>[
+                  Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey, size: 25,),
+                ], 
+               ),
 
             ],
           ),
-          
-         
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceAround,
-  children:<Widget>[
 
-    Column(
-            children: <Widget>[
-              Icon(Icons.payment, color: Colors.black87,),
-              Text('Pagamentos',
-              style: TextStyle(
-                color:Colors.black87,
-                fontWeight: FontWeight.bold
+      Divider(),
+
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+
+        Column(
+              children: <Widget>[
+              Icon(Icons.description_outlined, color: Colors.black,)
+                ], 
+               ),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Meus Dados',
+                  style: TextStyle(
+                    color:Colors.black87,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15
+                  ),
+                  ),
+                  Text('Minhas informações de conta',
+                  style: TextStyle(
+                    color:Colors.grey[400],
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                  ),   
+                                 ),
+                ], 
+               ),
+           Column(
+                children: <Widget>[
+                  Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey, size: 25,),
+                ], 
+               ),
+
+        ],
+      ),    
+
+    Divider(), 
+
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children:<Widget>[
+           
+       Column(
+              children: <Widget>[
+              Icon(Icons.settings, color: Colors.black)
+              ], 
               ),
-              )
-            ], 
-           ),
+
            
       Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Icon(Icons.settings, color: Colors.black87),
         Text('Configurações',
         style:TextStyle(
           color:Colors.black87,
-          fontWeight: FontWeight.bold
+          fontWeight: FontWeight.bold,
+          fontSize: 15
+        ),
+        ),
+        Text('Gerenciar, limpar histórico...   ',
+        style:TextStyle(
+          color:Colors.grey[400],
+          fontWeight: FontWeight.bold,
+          fontSize: 13
         ),
         ),
       ],
     ),
+
+           Column(
+                children: <Widget>[
+                  Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey, size: 25,),
+                ], 
+               ),
+
   ]
   ),
+
+  
     ],
       ),
     )
