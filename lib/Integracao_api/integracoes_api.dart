@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
+
 import 'package:js/js.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,10 +9,15 @@ import 'package:projeto_estagio/home/home.dart';
 
 import '../login/Login.dart';
 import '../models/produto_model.dart';
+import '../models/usuario_model.dart';
+
+
 
 class Integracoes{
 
   static String emailUsu = "";
+   static final _dio = Dio();
+
   static Future<List> buscarUsuarios() async{
     var url = Uri.parse('https://app-projetosestagio-api.herokuapp.com/usuarios');
     var response = await http.get(url);
@@ -48,14 +55,14 @@ class Integracoes{
   }
 
   @override
-  static Future<int> cadastroNovoPedido(List<ProdutoModel> produtos,int preco) async{
+  static Future<int> cadastroNovoPedido(List<ProdutoModel> list, double preco) async{
     try{
      String url = "https://app-projetosestagio-api.herokuapp.com/cadastroNovaVenda";
      HttpClient httpClient = new HttpClient();
      HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
      request.headers.set('content-type', 'application/json');
-     Map<String,dynamic> body ={
-      "email":"otavio.pegorin@unesp.br", "preco":preco, "produtos":produtos.toList()
+     Map<String,dynamic> body = {
+      "email":emailUsu, "preco":preco, "produtos": list
      };
      request.add(utf8.encode(json.encode(body)));
      HttpClientResponse response = await request.close();
@@ -95,6 +102,7 @@ class Integracoes{
     
   }
 
+  @override
   static Future<bool> cadastrarNovaSenha(email,senha) async{
       try{
         String url = "https://app-projetosestagio-api.herokuapp.com/cadastroNovaSenha";
@@ -113,10 +121,11 @@ class Integracoes{
       } 
     }
 
-    static Future<bool> cadastroNovoUsuario(nome,email,senha) async{
+    @override
+    static Future<bool> cadastroNovoUsuario(nome,email,senha,telefone) async{
       try{
         String url = "https://app-projetosestagio-api.herokuapp.com/criarUsuario";
-      Map<String, Object> body = {"nome":nome,"email":email,"senha":senha,"recuperarSenha":false,"adm":false};
+      Map<String, Object> body = {"nome":nome,"telefone":telefone,"email":email,"senha":senha,"recuperarSenha":false,"adm":false};
       HttpClient httpClient = new HttpClient();
       HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
       request.headers.set('content-type', 'application/json');
@@ -130,5 +139,23 @@ class Integracoes{
         return false;
       } 
     }
+
+    @override
+    static Future<Usuario_model> buscarUsuario() async{
+      try {
+      final Response response = await 
+          _dio 
+          .get('https://app-projetosestagio-api.herokuapp.com/getUsuarioByEmail/$emailUsu');
+
+      Usuario_model a = Usuario_model.fromJson(response.data);
+      print(a);
+      return a;
+    } catch (e) {
+      print(e);
+      throw Exception("Erro ao trazer usuarios");
+    }
+  }
 }
+
+
 

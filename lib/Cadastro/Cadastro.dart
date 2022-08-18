@@ -7,6 +7,7 @@ class Cadastro extends StatelessWidget {
   final _emailController = TextEditingController();
   final _nomeController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
@@ -100,6 +101,32 @@ class Cadastro extends StatelessWidget {
                 return null;
               }
             ),),
+            SizedBox(height: 30,),
+            Container(
+            height: 70,
+            width: 300,
+            alignment: Alignment.centerLeft,
+            child:TextFormField(
+              controller: _phoneController,
+              textAlign: TextAlign.left,
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                icon: Icon(Icons.phone),
+                labelText: "Telefone",
+                labelStyle: TextStyle(
+                  color: Colors.black45,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                )
+              ),
+              style: TextStyle(fontSize: 20,),
+              validator: (String ?value){
+                if(value == null || value.isEmpty){
+                  return 'Telefone é obrigatório';
+                }
+                return null;
+              }
+            ),),
           SizedBox(height: 30,),
             Container(
             height: 70,
@@ -177,7 +204,7 @@ class Cadastro extends StatelessWidget {
                     FocusScopeNode currentFocus = FocusScope.of(context);
                     if(formKey.currentState!.validate()){
                       if(_passwordController.text.compareTo(_confirmPasswordController.text)==0){
-                        bool a = await Integracoes.cadastroNovoUsuario(_nomeController.text, _emailController.text, _passwordController.text);
+                        bool a = await Integracoes.cadastroNovoUsuario(_nomeController.text, _emailController.text, _passwordController.text,_phoneController.text);
                         if(a){
                           ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

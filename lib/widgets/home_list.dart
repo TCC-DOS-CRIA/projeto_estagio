@@ -81,7 +81,7 @@ class HomeList extends StatelessWidget {
                           children: [
                             Expanded(
                               child: CachedNetworkImage(
-                                imageUrl:produto.image.toString(),
+                                imageUrl:produto.img_produto.toString(),
                                 fit: BoxFit.cover,
                                 placeholder: (_, __) {
                                   return Center(

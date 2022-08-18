@@ -7,6 +7,7 @@ import 'package:get/state_manager.dart';
 import 'package:projeto_estagio/Cadastro/Cadastro.dart';
 import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
 import 'package:projeto_estagio/models/produto_model.dart';
+import 'package:projeto_estagio/widgets/home_list.dart';
 
 import '../Integracao_api/integracoes_api.dart';
 
@@ -95,7 +96,7 @@ class DetailPage extends StatelessWidget {
                                         height: 150,
                                         child: CachedNetworkImage(
                                             imageUrl:
-                                                _.carrinho[key]!.image.toString(),
+                                                _.carrinho[key]!.img_produto.toString(),
                                             fit: BoxFit.cover,
                                             placeholder: (_, __) {
                                               return Center(
@@ -231,13 +232,58 @@ class DetailPage extends StatelessWidget {
                           elevation: 3,
                           padding: EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 20),
                         ),
-                        onPressed: (){
+                        onPressed: () async {
                     for (var element in _.produtos) {
                         if(element.noCarrinho == true){
                           a.add(element);
                         }
                       }
-                    Integracoes.cadastroNovoPedido(a,_.valorTotal().toInt());
+                    int deuCerto = await Integracoes.cadastroNovoPedido(a,_.valorTotal().toDouble());
+                    switch(deuCerto){
+                      case 1:
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(
+                                    "Pedido cadastrado com sucesso"),
+                                action: SnackBarAction(
+                                  label: "",
+                                  onPressed: () {},
+                                )));
+                            Future.delayed(Duration(seconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeList(),
+                                ));
+                                for (var element in _.produtos) {
+                                  element.noCarrinho = false;
+                                  element.quantidade = 0;
+                                }
+                                _.carrinho = Map();
+                            });
+                            break;
+                    case 0:
+                      ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(
+                                    "Erro ao cadastrar pedido"),
+                                action: SnackBarAction(
+                                  label: "",
+                                  onPressed: () {},
+                                )));
+                            Future.delayed(Duration(seconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeList(),
+                                ));
+                                for (var element in _.produtos) {
+                                  element.noCarrinho = false;
+                                  element.quantidade = 0;
+                                }
+                            });
+                            break;
+                        }
                   }, child: Text("Fazer Pedido")),)
                   
                 ],

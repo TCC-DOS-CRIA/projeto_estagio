@@ -13,6 +13,10 @@ class HomeController extends GetxController {
 
   Map<String, ProdutoModel> _carrinho = Map();
   Map<String, ProdutoModel> get carrinho => _carrinho;
+  set carrinho(Map<String, ProdutoModel> a){
+    _carrinho = a;
+  }
+  
 
   RxList<ProdutoModel> itemsCarrinho = RxList<ProdutoModel>([]);
 

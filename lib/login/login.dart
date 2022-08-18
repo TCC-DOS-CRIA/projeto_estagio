@@ -5,6 +5,8 @@ import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/home/home_page.dart';
+import 'package:projeto_estagio/models/usuario_model.dart';
+import 'package:projeto_estagio/perfil/perfil.dart';
 
 import '../Cadastro/Cadastro.dart';
 
@@ -110,6 +112,7 @@ class LoginPage extends StatelessWidget {
                               int deuCerto = await Integracoes.realizarLogin(
                                   _emailController.text,
                                   _passwordController.text);
+                              Usuario_model usu = await Integracoes.buscarUsuario();
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
@@ -123,11 +126,11 @@ class LoginPage extends StatelessWidget {
                                             label: "",
                                             onPressed: () {},
                                           )));
-                                  Future.delayed(Duration(seconds: 1), () {
+                                  Future.delayed(Duration(seconds: 2), () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => HomePage(),
+                                          builder: (context) => Perfil(usu),
                                         ));
                                     _emailController.clear();
                                     _passwordController.clear();
