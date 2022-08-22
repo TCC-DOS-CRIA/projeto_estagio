@@ -4,6 +4,7 @@ import 'package:projeto_estagio/Cadastro/CadastroDeNovaSenha.dart';
 import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/home/home.dart';
+import 'package:projeto_estagio/home/home_page.dart';
 
 import '../Cadastro/Cadastro.dart';
 
@@ -126,7 +127,7 @@ class LoginPage extends StatelessWidget {
                           );
                           Future.delayed(Duration(seconds: 1), () {
                           Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Home(),));
+                          builder: (context) => Home_page(),));
                           _emailController.clear();
                           _passwordController.clear();
                           });
