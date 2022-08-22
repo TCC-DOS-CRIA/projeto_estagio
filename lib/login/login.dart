@@ -7,6 +7,7 @@ import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/home/home_page.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
 import 'package:projeto_estagio/perfil/perfil.dart';
+import 'package:projeto_estagio/widgets/home_list.dart';
 
 import '../Cadastro/Cadastro.dart';
 
@@ -130,7 +131,7 @@ class LoginPage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Perfil(usu),
+                                          builder: (context) =>  HomePage(),
                                         ));
                                     _emailController.clear();
                                     _passwordController.clear();

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
 import 'package:projeto_estagio/models/produto_model.dart';
+import 'package:projeto_estagio/widgets/detalhes.dart';
 import 'package:projeto_estagio/widgets/home_detail.list.dart';
 
 class HomeList extends StatelessWidget {
@@ -91,19 +92,31 @@ class HomeList extends StatelessWidget {
                                 },
                               ),
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Text(
                               '${produto.nome.toString()}',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 20.0),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
+                            
+                            TextButton(
+                              child: Text('Mais detalhes'),
+                              onPressed: () {
+                                Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => Detalhes())
+                                );
+                                _.detalhes.clear();
+                                  _.listaDetalhes(
+                                    index, true);
+                                }
+                              ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  height: 25,
+                                  height: 30,
                                 ),
                                 Text(
                                   '${produto.preco.toString()}',

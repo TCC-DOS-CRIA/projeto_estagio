@@ -18,6 +18,9 @@ class HomeController extends GetxController {
   }
   
 
+  Map<String, ProdutoModel> _detalhes = Map();
+  Map<String, ProdutoModel> get detalhes => _detalhes;
+
   RxList<ProdutoModel> itemsCarrinho = RxList<ProdutoModel>([]);
 
   @override
@@ -50,10 +53,21 @@ class HomeController extends GetxController {
     update(['produtos', 'carrinho']);
   }
 
+  listaDetalhes(int index, bool selecionado) {
+    ProdutoModel produto = this._produtos[index];
+    this.produtos[index].selecionado = selecionado;
+    if (selecionado) {
+      this._detalhes[produto.nome] = produto;
+    } else {
+      this._detalhes.remove(produto.nome);
+    }
+    update(['produtos', 'detalhes']);
+  }
+
   double valorTotal() => produtos.fold<double>(
         0.0,
         (previousValue, element) =>
-            previousValue + (element.quantidade * element.preco),
+            previousValue + ((element.quantidade) * element.preco),
       );
 
   void increment(index) {

@@ -6,6 +6,7 @@ class ProdutoModel {
   int qtd_estoque;
   int quantidade;
   bool noCarrinho = false;
+  bool selecionado = false;
   bool excluido = false;
 
   ProdutoModel(

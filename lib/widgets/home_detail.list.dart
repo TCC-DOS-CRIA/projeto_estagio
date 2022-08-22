@@ -157,7 +157,7 @@ class DetailPage extends StatelessWidget {
                                                       color: Colors.yellow,
                                                     ),
                                                     Text(
-                                                      "${_.carrinho[key]!.quantidade}",
+                                                      "${_.carrinho[key]!.quantidade + 1}",
                                                       style: TextStyle(
                                                           fontSize: 16.0),
                                                     ),
