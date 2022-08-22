@@ -4,10 +4,11 @@ import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
 import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/splash/splash_page.dart';
 import 'Perfil/Perfil.dart';
+import 'PaginaInicial/PaginaInicial.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Perfil(),
+    home: PaginaInicial(),
   ));
 }
