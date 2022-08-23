@@ -149,21 +149,30 @@ class DetailPage extends StatelessWidget {
                                                     IconButton(
                                                       icon: Icon(Icons.remove),
                                                       onPressed: () {
-                                                        _.decrement(_
+                                                        if(_
+                                                            .carrinho[key]!
+                                                            .quantidade>0){
+                                                              _.decrement(_
                                                             .carrinho[key]!
                                                             .quantidade--);
-                                                        _.valorTotal();
+                                                            _.valorTotal();
+                                                            }
                                                       },
                                                       color: Colors.yellow,
                                                     ),
                                                     Text(
-                                                      "${_.carrinho[key]!.quantidade + 1}",
+                                                      "${_.carrinho[key]!.quantidade}",
                                                       style: TextStyle(
                                                           fontSize: 16.0),
                                                     ),
                                                     IconButton(
                                                       icon: Icon(Icons.add),
                                                       onPressed: () {
+                                                        if(_
+                                                            .carrinho[key]!
+                                                            .quantidade<_
+                                                            .carrinho[key]!
+                                                            .qtd_estoque)
                                                         _.increment(_
                                                             .carrinho[key]!
                                                             .quantidade++);

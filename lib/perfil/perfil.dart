@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
+import 'package:projeto_estagio/widgets/notif.dart';
 
 
 class Perfil extends StatelessWidget {
@@ -92,7 +93,7 @@ Padding(
     ),
     
     
-   
+
     Container(
       height: MediaQuery.of(context).size.height/2.2,
       padding: EdgeInsets.all(40),
@@ -105,7 +106,10 @@ Padding(
 
             Column(
                 children: <Widget>[
-                  Icon(Icons.notification_important_rounded, color: Colors.black, size:26)
+                  IconButton(icon: Icon(Icons.notification_important_rounded, color: Colors.black, size:26),
+                  onPressed: () {  Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => Notif())
+                                );},)
                 ], 
                ),
            Column(
@@ -130,10 +134,12 @@ Padding(
 
          Column(
                 children: <Widget>[
-                  Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey, size: 25,),
+                IconButton(icon: Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey, size: 25,),
+                onPressed: () { Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => Notif())
+                                ); },)
                 ], 
                ),
-
             ],
           ),
 

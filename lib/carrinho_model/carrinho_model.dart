@@ -47,8 +47,10 @@ class HomeController extends GetxController {
     this.produtos[index].noCarrinho = noCarrinho;
     if (noCarrinho) {
       this._carrinho[produto.nome] = produto;
+      produto.quantidade = 1;
     } else {
       this._carrinho.remove(produto.nome);
+      produto.quantidade = 0;
     }
     update(['produtos', 'carrinho']);
   }

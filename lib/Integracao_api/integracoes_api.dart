@@ -15,6 +15,7 @@ import '../models/usuario_model.dart';
 
 class Integracoes{
 
+  static bool notificacao = false;
   static String emailUsu = "";
    static final _dio = Dio();
 
