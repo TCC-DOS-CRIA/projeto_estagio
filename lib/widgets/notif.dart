@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
+import 'package:projeto_estagio/models/produto_model.dart';
 
 class Notif extends StatefulWidget {
   @override
@@ -8,9 +9,11 @@ class Notif extends StatefulWidget {
   }
 
   class _State extends State<Notif> {
-      bool isSwitched = false;
+      
 
  final Color fundo = Color.fromARGB(255, 149, 194, 253);
+
+        bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +25,13 @@ class Notif extends StatefulWidget {
       ),
 
       body: Row(children: [
-
+        
         Switch(
         value: isSwitched,
-        onChanged: (value){
+        onChanged: (valor){
           setState(() {
-            isSwitched = value;
-          Integracoes.notificacao = value;
+            isSwitched = valor;
+            Integracoes.notificacao = isSwitched;
           print(Integracoes.notificacao);
         });},
         activeTrackColor: Colors.lightGreenAccent,
@@ -36,4 +39,5 @@ class Notif extends StatefulWidget {
       ],)
     );
   }
+
 }

@@ -131,7 +131,7 @@ class LoginPage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>  Perfil(usu),
+                                          builder: (context) =>  HomePage(),
                                         ));
                                     _emailController.clear();
                                     _passwordController.clear();
