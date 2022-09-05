@@ -33,6 +33,7 @@ actions:<Widget>[
 ),
 
   body: Center(
+  child: SingleChildScrollView(
   child: Column(
   mainAxisAlignment: MainAxisAlignment.center,
   children: <Widget>[
@@ -148,6 +149,7 @@ Row(
 
 
 ],
+),
 ),
 ),
 );
