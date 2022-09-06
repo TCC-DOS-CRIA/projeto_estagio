@@ -6,6 +6,9 @@ import 'package:projeto_estagio/services/produto_services.dart';
 
 class HomeController extends GetxController {
   bool _loading = true;
+
+  HomeController(this.categoria);
+
   bool get loading => _loading;
 
   List<ProdutoModel> _produtos = [];
@@ -17,6 +20,7 @@ class HomeController extends GetxController {
     _carrinho = a;
   }
   
+  final String categoria;
 
   Map<String, ProdutoModel> _detalhes = Map();
   Map<String, ProdutoModel> get detalhes => _detalhes;
@@ -31,12 +35,26 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
-    super.onReady();
-    this.carregarProdutos();
+    if(categoria == ""){
+      super.onReady();
+      this.carregarProdutos();
+    }else{
+      super.onReady();
+      this.carregarProdutosCategoria(categoria);
+    }
+    
+    
   }
 
   Future<void> carregarProdutos() async {
     final data = await ProdutoServices.instance.getProdutos();
+    this._produtos = data;
+    this._loading = false;
+    update(['produtos']);
+  }
+
+  Future<void> carregarProdutosCategoria(String cat) async {
+    final data = await ProdutoServices.instance.getProdutosByCategoria(cat);
     this._produtos = data;
     this._loading = false;
     update(['produtos']);

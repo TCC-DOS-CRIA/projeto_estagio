@@ -1,23 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
+import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
+import 'package:projeto_estagio/appBar/AppBar.dart';
+import 'package:projeto_estagio/home/home_page.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
+import 'package:projeto_estagio/widgets/home_list.dart';
 import 'package:projeto_estagio/widgets/notif.dart';
 
+class Perfil extends StatefulWidget {
+  const Perfil({
+    Key? key,
+    this.u
+  }) : super(key: key);
+  final Usuario_model? u;
 
-class Perfil extends StatelessWidget {
-
-  Usuario_model usuario = Usuario_model();
-
-Perfil(Usuario_model u){
-  usuario = u;
+  @override
+  State<Perfil> createState() {
+    return _PerfilState(u);
+  }
 }
+
+class _PerfilState extends State<Perfil> {
+Usuario_model? usuario = Usuario_model();
+_PerfilState(Usuario_model? usu){
+  usuario = usu;
+}
+  int activeIndex = 0;
+  int _currentIndex = 3;
+  
 final Color fundo = Color.fromARGB(255, 149, 194, 253);
 final String url = 'https://st2.depositphotos.com/2222024/5819/i/450/depositphotos_58199799-stock-photo-beautiful-happy-reddish-havanese-puppy.jpg';
 
 @override
 Widget build (BuildContext context){
-return Scaffold(
+return Scaffold(bottomNavigationBar: BottomNavBar(
+                 tabIndex: _currentIndex,
+                 onSelectedTab: _selectedIndex,
+                ),
 appBar: AppBar(
+  automaticallyImplyLeading: false,
   centerTitle: true,
 title: Text('MEU PERFIL',
 style: TextStyle(
@@ -27,20 +48,9 @@ style: TextStyle(
               ),
 elevation: 0,
 backgroundColor: fundo,
-leading: IconButton(
-  icon: Icon(Icons.arrow_back),
-  color: Colors.black,
-  onPressed: (){},
-  ),
-actions:<Widget>[
-  IconButton(
-    icon: Icon(Icons.search),
-    color: Colors.black,
-    onPressed: (){},
-    )
-],
 ),
-body: Column(
+body: SingleChildScrollView(
+  child: Column(
   children: <Widget>[
     Container(
       padding: EdgeInsets.only(top:16),
@@ -63,7 +73,7 @@ body: Column(
             padding: EdgeInsets.only(top: 30, bottom: 10),
             child: CircleAvatar(
             radius: 80.0,
-            backgroundImage: NetworkImage(usuario.img_usuario),
+            backgroundImage: NetworkImage(usuario!.img_usuario),
             ),
           ),
         ],
@@ -71,7 +81,7 @@ body: Column(
        
        Padding(
          padding: const EdgeInsets.only(top: 5, bottom: 8),
-         child: Text(usuario.nome,
+         child: Text(usuario!.nome,
          style: TextStyle(
           color: Colors.black,
           fontSize: 24,
@@ -82,7 +92,7 @@ body: Column(
 
 Padding(
          padding: const EdgeInsets.only(top: 1,bottom: 32),
-         child: Text(usuario.email,
+         child: Text(usuario!.email,
          style: TextStyle(
           color:Color.fromARGB(146, 0, 0, 0)
          ),
@@ -108,7 +118,7 @@ Padding(
                 children: <Widget>[
                   IconButton(icon: Icon(Icons.notification_important_rounded, color: Colors.black, size:26),
                   onPressed: () {  Navigator.push(context, 
-                                MaterialPageRoute(builder: (context) => Notif())
+                                MaterialPageRoute(builder: (context) => Notif(usuario!))
                                 );},)
                 ], 
                ),
@@ -136,7 +146,7 @@ Padding(
                 children: <Widget>[
                 IconButton(icon: Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey, size: 25,),
                 onPressed: () { Navigator.push(context, 
-                                MaterialPageRoute(builder: (context) => Notif())
+                                MaterialPageRoute(builder: (context) => Notif(usuario!))
                                 ); },)
                 ], 
                ),
@@ -231,7 +241,14 @@ Row(
     )
    ],
   ),
-
+)
+  
  );
 }
+  void _selectedIndex(int index) {
+    setState(() => _currentIndex =
+        index); // Mandamos a variável por SetState() para fazer uma navegação dinâmica
+    // Assim não precisamos recarregar as peginas quando for chamada na BottomAppBar
+  }
+
 }

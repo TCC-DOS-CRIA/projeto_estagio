@@ -32,7 +32,7 @@ class Integracoes{
   @override
   static Future<int> realizarLogin(email,senha) async{
     try{
-      String url = "https://app-projetosestagio-api.herokuapp.com/autenticarUsuario";
+      String url = "https://app-projetosestagio-api.herokuapp.com/usuario/autentica";
     Map<String, String> body = {"email":email,"senha":senha};
      HttpClient httpClient = new HttpClient();
      HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
@@ -58,7 +58,7 @@ class Integracoes{
   @override
   static Future<int> cadastroNovoPedido(List<ProdutoModel> list, double preco) async{
     try{
-     String url = "https://app-projetosestagio-api.herokuapp.com/cadastroNovaVenda";
+     String url = "https://app-projetosestagio-api.herokuapp.com/venda";
      HttpClient httpClient = new HttpClient();
      HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
      request.headers.set('content-type', 'application/json');
@@ -83,7 +83,7 @@ class Integracoes{
   @override
   static Future<int> recuperaSenha(email) async{
     try{
-      String url = "https://app-projetosestagio-api.herokuapp.com/recuperaSenha";
+      String url = "https://app-projetosestagio-api.herokuapp.com/usuario/recuperaSenha";
      Map<String, String> body = {"email":email};
      HttpClient httpClient = new HttpClient();
      HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
@@ -106,7 +106,7 @@ class Integracoes{
   @override
   static Future<bool> cadastrarNovaSenha(email,senha) async{
       try{
-        String url = "https://app-projetosestagio-api.herokuapp.com/cadastroNovaSenha";
+        String url = "https://app-projetosestagio-api.herokuapp.com/usuario/cadastroNovaSenha";
       Map<String, String> body = {"email":email,"senha":senha};
       HttpClient httpClient = new HttpClient();
       HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
@@ -125,7 +125,7 @@ class Integracoes{
     @override
     static Future<bool> cadastroNovoUsuario(nome,email,senha,telefone) async{
       try{
-        String url = "https://app-projetosestagio-api.herokuapp.com/criarUsuario";
+        String url = "https://app-projetosestagio-api.herokuapp.com/usuario";
       Map<String, Object> body = {"nome":nome,"telefone":telefone,"email":email,"senha":senha,"recuperarSenha":false,"adm":false};
       HttpClient httpClient = new HttpClient();
       HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
@@ -146,7 +146,7 @@ class Integracoes{
       try {
       final Response response = await 
           _dio 
-          .get('https://app-projetosestagio-api.herokuapp.com/getUsuarioByEmail/$emailUsu');
+          .get('https://app-projetosestagio-api.herokuapp.com/usuarios/e/$emailUsu');
 
       Usuario_model a = Usuario_model.fromJson(response.data);
       print(a);
@@ -156,7 +156,21 @@ class Integracoes{
       throw Exception("Erro ao trazer usuarios");
     }
   }
+
+  static void salvaUsuario(Usuario_model usuario) async{
+    try{
+        String url = "https://app-projetosestagio-api.herokuapp.com/usuario";
+      Map<String, Object> body = {"email":usuario.email,"notificacao":usuario.notificacao};
+      HttpClient httpClient = new HttpClient();
+      HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+      request.headers.set('content-type', 'application/json');
+      request.add(utf8.encode(json.encode(body)));
+      HttpClientResponse response = await request.close();
+      String reply = await response.transform(utf8.decoder).join();
+      httpClient.close();
+      bool resposta = json.decode(reply);
+      }catch(e){
+        print(e);
+      } 
+  }
 }
-
-
-

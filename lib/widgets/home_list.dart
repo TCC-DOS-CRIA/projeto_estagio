@@ -2,27 +2,55 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
 import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
 import 'package:projeto_estagio/models/produto_model.dart';
 import 'package:projeto_estagio/widgets/detalhes.dart';
 import 'package:projeto_estagio/widgets/home_detail.list.dart';
+import 'package:projeto_estagio/appBar/AppBar.dart';
 
-class HomeList extends StatelessWidget {
+class HomeList extends StatefulWidget {
+  const HomeList({
+    Key? key,
+  }) : super(key: key);
+
   @override
+  State<HomeList> createState() {
+    return _HomeListState();
+  }
+}
+class _HomeListState extends State<HomeList> {
+  int activeIndex = 0;
+  int _currentIndex = 2;
+@override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       id: 'produtos',
       builder: (_) {
         if (_.loading) {
-          return Center(
-            child: LinearProgressIndicator(),
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(child: Image(image: new AssetImage("imagens/giphy.gif")),)
           );
         }
 
-        return Scaffold(
+          return Scaffold(bottomNavigationBar: BottomNavBar(
+                 tabIndex: _currentIndex,
+                 onSelectedTab: _selectedIndex,
+                ),
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text('Carrinho'),
             actions: <Widget>[
+              IconButton(
+            onPressed: (){
+              showSearch(
+                context: context, 
+              delegate: Pesquisa(),
+              );
+            }, 
+            icon: Icon(Icons.search_rounded)
+            ),
               GetBuilder<HomeController>(
                   id: 'carrinho',
                   builder: (_) {
@@ -63,10 +91,12 @@ class HomeList extends StatelessWidget {
             ],
           ),
           body: SingleChildScrollView(
-            child: Container(
+            child: Column(
+              children: <Widget>[ Container(
               color: Colors.grey[300],
               height: Get.height / 1,
               child: GridView.builder(
+                physics: ScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
                 itemCount: _.produtos == null ? 0 : _.produtos.length,
@@ -161,10 +191,18 @@ class HomeList extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ),]
+            )
+            
           ),
         );
       },
     );
+    
+  }
+  void _selectedIndex(int index) {
+    setState(() => _currentIndex =
+        index); // Mandamos a variável por SetState() para fazer uma navegação dinâmica
+    // Assim não precisamos recarregar as peginas quando for chamada na BottomAppBar
   }
 }
