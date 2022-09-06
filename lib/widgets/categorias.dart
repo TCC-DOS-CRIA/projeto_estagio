@@ -74,7 +74,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "lanches"!');
+                       Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "LANCHES"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/lanches.png',
@@ -89,7 +93,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "salgados"!');
+                         Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "SALGADOS"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/salgados.png',
@@ -99,7 +107,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "cafeteria"!');
+                       Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "CAFE"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/cafeteria.png',
@@ -114,7 +126,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "doces"!');
+                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "DOCES"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/doces.png',
@@ -124,7 +140,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "pratos"!');
+                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "REFEICAO"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/pratos.png',
@@ -139,7 +159,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "salgadinhos"!');
+                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "SALGADINHO"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/salgadinhos.png',
@@ -149,7 +173,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                      print('Você selecionou "sorvetes"!');
+                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeCategoria(categoria: "SORVETES"),
+                                ));
                     },
                     child: Image.asset(
                       'imagens/sorvetes.png',

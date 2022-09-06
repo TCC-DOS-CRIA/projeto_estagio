@@ -42,15 +42,6 @@ class _HomeListState extends State<HomeList> {
             automaticallyImplyLeading: false,
             title: Text('Carrinho'),
             actions: <Widget>[
-              IconButton(
-            onPressed: (){
-              showSearch(
-                context: context, 
-              delegate: Pesquisa(),
-              );
-            }, 
-            icon: Icon(Icons.search_rounded)
-            ),
               GetBuilder<HomeController>(
                   id: 'carrinho',
                   builder: (_) {

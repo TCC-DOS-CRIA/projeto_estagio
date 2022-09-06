@@ -9,7 +9,7 @@ import 'package:projeto_estagio/widgets/notif.dart';
 import 'package:projeto_estagio/perfil/perfil.dart';
 import '../Integracao_api/integracoes_api.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
     Key? key,
     required this.tabIndex,
@@ -18,6 +18,21 @@ class BottomNavBar extends StatelessWidget {
 
   final int tabIndex;
   final Function onSelectedTab;
+  
+  @override
+  State<StatefulWidget> createState() {
+    return _NavBarState(tabIndex, onSelectedTab); 
+  }
+}
+
+class _NavBarState extends State<BottomNavBar> {
+
+   late int tabIndex;
+   late Function onSelectedTab;
+  _NavBarState(int tabIndex, Function onSelectedTab){
+    this.tabIndex = tabIndex;
+    this.onSelectedTab = onSelectedTab;
+  }
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
