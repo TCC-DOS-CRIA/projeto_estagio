@@ -14,7 +14,7 @@ class PaginaInicial extends StatefulWidget {
 
   @override
   State<PaginaInicial> createState() {
-    return _PaginaInicialState();
+    return new _PaginaInicialState();
   }
 }
 
@@ -44,9 +44,10 @@ class _PaginaInicialState extends State<PaginaInicial> {
             color: Colors.black,
             onPressed: () {
               showSearch(
-                context: context, 
-              delegate: Pesquisa(),
-              );},
+                context: context,
+                delegate: Pesquisa(),
+              );
+            },
           )
         ],
       ),
@@ -60,11 +61,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "BEBIDAS"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "BEBIDAS"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/bebidas.png',
@@ -74,11 +76,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "LANCHES"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "LANCHES"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/lanches.png',
@@ -93,11 +96,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "SALGADOS"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "SALGADOS"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/salgados.png',
@@ -107,11 +111,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "CAFE"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "CAFE"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/cafeteria.png',
@@ -126,11 +131,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "DOCES"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "DOCES"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/doces.png',
@@ -140,11 +146,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "REFEICAO"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "REFEICAO"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/pratos.png',
@@ -159,11 +166,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "SALGADINHO"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "SALGADINHO"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/salgadinhos.png',
@@ -173,11 +181,12 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeCategoria(categoria: "SORVETES"),
-                                ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                new HomeCategoria(categoria: "SORVETES"),
+                          ));
                     },
                     child: Image.asset(
                       'imagens/sorvetes.png',

@@ -20,17 +20,17 @@ class ProdutoModel {
       this.dataexcluido = "",
       this.img_produto = ""});
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "nome": nome,
-        "preco":preco,
-        "categoria":categoria,
-        "descricao":descricao,
-        "qtd_estoque":qtd_estoque,
-        "quantidade":quantidade,
-        "excluido":excluido,
-        "data_excluido":dataexcluido,
-        "img_produto":img_produto
-    };
+        "preco": preco,
+        "categoria": categoria,
+        "descricao": descricao,
+        "qtd_estoque": qtd_estoque,
+        "quantidade": quantidade,
+        "excluido": excluido,
+        "data_excluido": dataexcluido,
+        "img_produto": img_produto
+      };
   static ProdutoModel fromJson(Map<String, dynamic> json) {
     return ProdutoModel(
       nome: json['nome'],
@@ -43,8 +43,5 @@ class ProdutoModel {
       dataexcluido: json['data_excluido'],
       img_produto: json['img_produto'],
     );
-
-    
   }
-  
 }

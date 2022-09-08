@@ -10,7 +10,6 @@ class NavPesquisa extends StatefulWidget {
   const NavPesquisa({
     Key? key,
   }) : super(key: key);
-  
 
   @override
   State<NavPesquisa> createState() {
@@ -19,18 +18,18 @@ class NavPesquisa extends StatefulWidget {
 }
 
 class _NavPesquisaState extends State<NavPesquisa> {
-    int activeIndex = 0;
+  int activeIndex = 0;
   int _currentIndex = 2;
-  
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(bottomNavigationBar: BottomNavBar(
-                 tabIndex: _currentIndex,
-                 onSelectedTab: _selectedIndex,
+    return Scaffold(
+        bottomNavigationBar: BottomNavBar(
+      tabIndex: _currentIndex,
+      onSelectedTab: _selectedIndex,
     ));
   }
-  
 
   void _selectedIndex(int index) {
     setState(() => _currentIndex =
@@ -39,20 +38,19 @@ class _NavPesquisaState extends State<NavPesquisa> {
   }
 }
 
-class Pesquisa extends SearchDelegate<String>{
-
+class Pesquisa extends SearchDelegate<String> {
   @override
-    String get searchFieldLabel => 'nome ou marca';
+  String get searchFieldLabel => 'nome ou marca';
 
   @override
   List<Widget>? buildActions(BuildContext context) {
     // TODO: implement buildActions
     return [
-      IconButton( 
+      IconButton(
         onPressed: () {
-        query = '';
-      },
-      icon: Icon(Icons.clear),
+          query = '';
+        },
+        icon: Icon(Icons.clear),
       ),
     ];
   }
@@ -64,8 +62,8 @@ class Pesquisa extends SearchDelegate<String>{
       onPressed: () {
         close(context, '');
       },
-       icon: Icon(Icons.arrow_back),
-       );
+      icon: Icon(Icons.arrow_back),
+    );
   }
 
   @override
@@ -77,42 +75,46 @@ class Pesquisa extends SearchDelegate<String>{
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
-    if(query.isEmpty){
+    if (query.isEmpty) {
       return Container();
     }
-     return FutureBuilder<List>(
-      future: sugestoes(),
-      builder: (context, snapshot) {
-        print(snapshot);
-        if(snapshot.hasData){
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: ((context, index) {
-              return ListTile(
-                leading: Image.network(snapshot.data![index]['img_produto']),
-                title: Text(snapshot.data![index]['nome']),
-                subtitle: Text(snapshot.data![index]['descricao']),
-                trailing: Text(snapshot.data![index]['preco'].toString()),
-              );
-            }));
-        }else if(snapshot.hasError){
+    return FutureBuilder<List>(
+        future: sugestoes(),
+        builder: (context, snapshot) {
+          print(snapshot);
+          if (snapshot.hasData) {
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: ((context, index) {
+                  return ListTile(
+                    leading:
+                        Image.network(snapshot.data![index]['img_produto']),
+                    title: Text(snapshot.data![index]['nome']),
+                    subtitle: Text(snapshot.data![index]['descricao']),
+                    trailing: Text(snapshot.data![index]['preco'].toString()),
+                  );
+                }));
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Erro ao pesquisar produtos!'),
+            );
+          }
           return Center(
-            child: Text('Erro ao pesquisar produtos!'),
+            child: CircularProgressIndicator(),
           );
-        }
-        return Center(child: CircularProgressIndicator(),);
-      });
+        });
   }
-
 
   Future<List> sugestoes() async {
     var url = Uri.parse(
-      'https://app-projetosestagio-api.herokuapp.com/getProdutoByName/$query');
-      var response = await http.get(url);
-      if(response.statusCode == 200){
-        return json.decode(utf8.decode(response.bodyBytes)).map((produto) => produto).toList();
-      }
-      throw Exception('Produto não encontrado :(');
+        'https://app-projetosestagio-api.herokuapp.com/getProdutoByName/$query');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      return json
+          .decode(utf8.decode(response.bodyBytes))
+          .map((produto) => produto)
+          .toList();
+    }
+    throw Exception('Produto não encontrado :(');
   }
-
 }

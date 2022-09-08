@@ -18,7 +18,7 @@ class Detalhes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-        init: HomeController(""),
+        init: new HomeController(""),
         builder: (_) {
           return Scaffold(
             appBar: AppBar(

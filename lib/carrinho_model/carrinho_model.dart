@@ -16,10 +16,10 @@ class HomeController extends GetxController {
 
   Map<String, ProdutoModel> _carrinho = Map();
   Map<String, ProdutoModel> get carrinho => _carrinho;
-  set carrinho(Map<String, ProdutoModel> a){
+  set carrinho(Map<String, ProdutoModel> a) {
     _carrinho = a;
   }
-  
+
   final String categoria;
 
   Map<String, ProdutoModel> _detalhes = Map();
@@ -35,15 +35,13 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
-    if(categoria == ""){
+    if (categoria == "") {
       super.onReady();
       this.carregarProdutos();
-    }else{
+    } else {
       super.onReady();
       this.carregarProdutosCategoria(categoria);
     }
-    
-    
   }
 
   Future<void> carregarProdutos() async {

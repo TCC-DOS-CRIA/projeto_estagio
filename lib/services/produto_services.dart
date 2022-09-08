@@ -11,14 +11,14 @@ class ProdutoServices {
 
   final _dio = Dio();
 
-
   Future<List<ProdutoModel>> getProdutos() async {
     try {
       final Response response = await this
           ._dio
           .get('https://app-projetosestagio-api.herokuapp.com/produtos');
 
-      List<ProdutoModel> a = (response.data as List).map((e) => ProdutoModel.fromJson(e)).toList();
+      List<ProdutoModel> a =
+          (response.data as List).map((e) => ProdutoModel.fromJson(e)).toList();
       print(a);
       return a;
     } catch (e) {
@@ -27,13 +27,14 @@ class ProdutoServices {
     }
   }
 
-  Future<List<ProdutoModel>> getProdutosByCategoria(String cat) async{
+  Future<List<ProdutoModel>> getProdutosByCategoria(String cat) async {
     try {
-      final Response response = await this
-          ._dio
-          .get('https://app-projetosestagio-api.herokuapp.com/getProdutoByCategoria/'+cat);
+      final Response response = await this._dio.get(
+          'https://app-projetosestagio-api.herokuapp.com/getProdutoByCategoria/' +
+              cat);
 
-      List<ProdutoModel> a = (response.data as List).map((e) => ProdutoModel.fromJson(e)).toList();
+      List<ProdutoModel> a =
+          (response.data as List).map((e) => ProdutoModel.fromJson(e)).toList();
       print(a);
       return a;
     } catch (e) {

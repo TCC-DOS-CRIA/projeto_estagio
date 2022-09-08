@@ -17,7 +17,6 @@ class DetailPage extends StatelessWidget {
   bool _enabled = false;
   List<ProdutoModel> a = [];
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -95,8 +94,9 @@ class DetailPage extends StatelessWidget {
                                         width: 150,
                                         height: 150,
                                         child: CachedNetworkImage(
-                                            imageUrl:
-                                                _.carrinho[key]!.img_produto.toString(),
+                                            imageUrl: _
+                                                .carrinho[key]!.img_produto
+                                                .toString(),
                                             fit: BoxFit.cover,
                                             placeholder: (_, __) {
                                               return Center(
@@ -149,14 +149,14 @@ class DetailPage extends StatelessWidget {
                                                     IconButton(
                                                       icon: Icon(Icons.remove),
                                                       onPressed: () {
-                                                        if(_
-                                                            .carrinho[key]!
-                                                            .quantidade>0){
-                                                              _.decrement(_
-                                                            .carrinho[key]!
-                                                            .quantidade--);
-                                                            _.valorTotal();
-                                                            }
+                                                        if (_.carrinho[key]!
+                                                                .quantidade >
+                                                            0) {
+                                                          _.decrement(_
+                                                              .carrinho[key]!
+                                                              .quantidade--);
+                                                          _.valorTotal();
+                                                        }
                                                       },
                                                       color: Colors.yellow,
                                                     ),
@@ -168,14 +168,13 @@ class DetailPage extends StatelessWidget {
                                                     IconButton(
                                                       icon: Icon(Icons.add),
                                                       onPressed: () {
-                                                        if(_
-                                                            .carrinho[key]!
-                                                            .quantidade<_
-                                                            .carrinho[key]!
-                                                            .qtd_estoque)
-                                                        _.increment(_
-                                                            .carrinho[key]!
-                                                            .quantidade++);
+                                                        if (_.carrinho[key]!
+                                                                .quantidade <
+                                                            _.carrinho[key]!
+                                                                .qtd_estoque)
+                                                          _.increment(_
+                                                              .carrinho[key]!
+                                                              .quantidade++);
                                                         _.valorTotal();
                                                       },
                                                       color: Colors.yellow,
@@ -234,67 +233,70 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                        height: 100,
-                        width: 300,
-                        alignment: Alignment.center,
-                        child: ElevatedButton(style: ElevatedButton.styleFrom(
+                    height: 100,
+                    width: 300,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
                           elevation: 3,
-                          padding: EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 20),
+                          padding: EdgeInsets.only(
+                              top: 20, left: 25, right: 25, bottom: 20),
                         ),
                         onPressed: () async {
-                    for (var element in _.produtos) {
-                        if(element.noCarrinho == true){
-                          a.add(element);
-                        }
-                      }
-                    int deuCerto = await Integracoes.cadastroNovoPedido(a,_.valorTotal().toDouble());
-                    switch(deuCerto){
-                      case 1:
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text(
-                                    "Pedido cadastrado com sucesso"),
-                                action: SnackBarAction(
-                                  label: "",
-                                  onPressed: () {},
-                                )));
-                            Future.delayed(Duration(seconds: 1), () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeList(),
-                                ));
+                          for (var element in _.produtos) {
+                            if (element.noCarrinho == true) {
+                              a.add(element);
+                            }
+                          }
+                          int deuCerto = await Integracoes.cadastroNovoPedido(
+                              a, _.valorTotal().toDouble());
+                          switch (deuCerto) {
+                            case 1:
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content:
+                                          Text("Pedido cadastrado com sucesso"),
+                                      action: SnackBarAction(
+                                        label: "",
+                                        onPressed: () {},
+                                      )));
+                              Future.delayed(Duration(seconds: 1), () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomeList(),
+                                    ));
                                 for (var element in _.produtos) {
                                   element.noCarrinho = false;
                                   element.quantidade = 0;
                                 }
                                 _.carrinho = Map();
-                            });
-                            break;
-                    case 0:
-                      ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text(
-                                    "Erro ao cadastrar pedido"),
-                                action: SnackBarAction(
-                                  label: "",
-                                  onPressed: () {},
-                                )));
-                            Future.delayed(Duration(seconds: 1), () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeList(),
-                                ));
+                              });
+                              break;
+                            case 0:
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      content: Text("Erro ao cadastrar pedido"),
+                                      action: SnackBarAction(
+                                        label: "",
+                                        onPressed: () {},
+                                      )));
+                              Future.delayed(Duration(seconds: 1), () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomeList(),
+                                    ));
                                 for (var element in _.produtos) {
                                   element.noCarrinho = false;
                                   element.quantidade = 0;
                                 }
-                            });
-                            break;
-                        }
-                  }, child: Text("Fazer Pedido")),)
-                  
+                              });
+                              break;
+                          }
+                        },
+                        child: Text("Fazer Pedido")),
+                  )
                 ],
               ),
             ),

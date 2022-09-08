@@ -18,18 +18,17 @@ class BottomNavBar extends StatefulWidget {
 
   final int tabIndex;
   final Function onSelectedTab;
-  
+
   @override
   State<StatefulWidget> createState() {
-    return _NavBarState(tabIndex, onSelectedTab); 
+    return new _NavBarState(tabIndex, onSelectedTab);
   }
 }
 
 class _NavBarState extends State<BottomNavBar> {
-
-   late int tabIndex;
-   late Function onSelectedTab;
-  _NavBarState(int tabIndex, Function onSelectedTab){
+  late int tabIndex;
+  late Function onSelectedTab;
+  _NavBarState(int tabIndex, Function onSelectedTab) {
     this.tabIndex = tabIndex;
     this.onSelectedTab = onSelectedTab;
   }
@@ -37,53 +36,50 @@ class _NavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(255, 229, 229, 229),
-          selectedItemColor: Colors.blue,
-          currentIndex: tabIndex,
-          showSelectedLabels: true,
-          showUnselectedLabels: false,
-      onTap: (value) async{
+      backgroundColor: const Color.fromARGB(255, 229, 229, 229),
+      selectedItemColor: Colors.blue,
+      currentIndex: tabIndex,
+      showSelectedLabels: true,
+      showUnselectedLabels: false,
+      onTap: (value) async {
         Usuario_model usu = await Integracoes.buscarUsuario();
         // Respond to item press.
         onSelectedTab(value);
         switch (value) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) =>  Home(),
-        ));
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: 
-          (context) => PaginaInicial())
-        );
-              break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) =>  HomePage(),
-        ));
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) =>  Perfil(u: usu),
-        ));
-        break;
-    }
+          case 0:
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => new Home(),
+                ));
+            break;
+          case 1:
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => new PaginaInicial()));
+            break;
+          case 2:
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => new HomePage(),
+                ));
+            HomePage.setState();
+            break;
+          case 3:
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => new Perfil(u: usu),
+                ));
+            break;
+        }
       },
       items: [
         BottomNavigationBarItem(
           label: 'Home',
           icon: Icon(Icons.home),
         ),
-        BottomNavigationBarItem(
-            label: 'Pesquisa', icon: Icon(Icons.search)),
+        BottomNavigationBarItem(label: 'Pesquisa', icon: Icon(Icons.search)),
         BottomNavigationBarItem(
           label: 'Cardápio',
           icon: Icon(Icons.restaurant),
@@ -95,6 +91,4 @@ class _NavBarState extends State<BottomNavBar> {
       ],
     );
   }
-
-  
 }

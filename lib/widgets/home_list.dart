@@ -19,25 +19,28 @@ class HomeList extends StatefulWidget {
     return _HomeListState();
   }
 }
+
 class _HomeListState extends State<HomeList> {
   int activeIndex = 0;
   int _currentIndex = 2;
-@override
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       id: 'produtos',
       builder: (_) {
         if (_.loading) {
           return Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(child: Image(image: new AssetImage("imagens/giphy.gif")),)
-          );
+              backgroundColor: Colors.white,
+              body: Center(
+                child: Image(image: new AssetImage("imagens/giphy.gif")),
+              ));
         }
 
-          return Scaffold(bottomNavigationBar: BottomNavBar(
-                 tabIndex: _currentIndex,
-                 onSelectedTab: _selectedIndex,
-                ),
+        return Scaffold(
+          bottomNavigationBar: BottomNavBar(
+            tabIndex: _currentIndex,
+            onSelectedTab: _selectedIndex,
+          ),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text('Carrinho'),
@@ -46,44 +49,44 @@ class _HomeListState extends State<HomeList> {
                   id: 'carrinho',
                   builder: (_) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 16.0, top: 8.0),
-                      child: GestureDetector(
-                        child: Stack(
-                          alignment: Alignment.topCenter,
-                          children: <Widget>[
-                            Icon(
-                              Icons.shopping_cart,
-                              size: 38,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 2.0),
-                              child: CircleAvatar(
-                                radius: 8.0,
-                                backgroundColor: Colors.red,
-                                foregroundColor: Colors.white,
-                                child: Text(
-                                  "${_.carrinho.length}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0),
+                        padding: const EdgeInsets.only(right: 16.0, top: 8.0),
+                        child: GestureDetector(
+                          child: Stack(
+                            alignment: Alignment.topCenter,
+                            children: <Widget>[
+                              Icon(
+                                Icons.shopping_cart,
+                                size: 38,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 2.0),
+                                child: CircleAvatar(
+                                  radius: 8.0,
+                                  backgroundColor: Colors.red,
+                                  foregroundColor: Colors.white,
+                                  child: Text(
+                                    "${_.carrinho.length}",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12.0),
+                                  ),
                                 ),
                               ),
+                            ],
+                          ),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(),
                             ),
-                          ],
-                        ),
-                        onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(),
-                              ),
-                      ),
-                    ));
+                          ),
+                        ));
                   })
             ],
           ),
           body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[ Container(
+              child: Column(children: <Widget>[
+            Container(
               color: Colors.grey[300],
               height: Get.height / 1,
               child: GridView.builder(
@@ -103,7 +106,7 @@ class _HomeListState extends State<HomeList> {
                           children: [
                             Expanded(
                               child: CachedNetworkImage(
-                                imageUrl:produto.img_produto.toString(),
+                                imageUrl: produto.img_produto.toString(),
                                 fit: BoxFit.cover,
                                 placeholder: (_, __) {
                                   return Center(
@@ -121,18 +124,16 @@ class _HomeListState extends State<HomeList> {
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 20.0),
                             ),
-                            
                             TextButton(
-                              child: Text('Mais detalhes'),
-                              onPressed: () {
-                                Navigator.push(context, 
-                                MaterialPageRoute(builder: (context) => Detalhes())
-                                );
-                                _.detalhes.clear();
-                                  _.listaDetalhes(
-                                    index, true);
-                                }
-                              ),
+                                child: Text('Mais detalhes'),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Detalhes()));
+                                  _.detalhes.clear();
+                                  _.listaDetalhes(index, true);
+                                }),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -162,12 +163,10 @@ class _HomeListState extends State<HomeList> {
                                             : Colors.green,
                                       ),
                                       onTap: () {
-                                        if(produto.noCarrinho){
-                                          _.listaCarrinho(
-                                            index, false);
-                                        }else{
-                                          _.listaCarrinho(
-                                            index, true);
+                                        if (produto.noCarrinho) {
+                                          _.listaCarrinho(index, false);
+                                        } else {
+                                          _.listaCarrinho(index, true);
                                         }
                                       },
                                     ),
@@ -182,15 +181,13 @@ class _HomeListState extends State<HomeList> {
                   );
                 },
               ),
-            ),]
-            )
-            
-          ),
+            ),
+          ])),
         );
       },
     );
-    
   }
+
   void _selectedIndex(int index) {
     setState(() => _currentIndex =
         index); // Mandamos a variável por SetState() para fazer uma navegação dinâmica
