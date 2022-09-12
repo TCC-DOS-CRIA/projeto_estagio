@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_estagio/Cadastro/CadastroDeNovaSenha.dart';
 import 'package:projeto_estagio/EsqueceuSenha/esqueceuSenha.dart';
+import 'package:projeto_estagio/Inicio/inicio.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/home/home_page.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
 import 'package:projeto_estagio/perfil/perfil.dart';
 import 'package:projeto_estagio/widgets/home_list.dart';
+import 'package:projeto_estagio/Inicio/inicio.dart';
 
 import '../Cadastro/Cadastro.dart';
 
@@ -132,7 +134,7 @@ class LoginPage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Home(),
+                                          builder: (context) => Inicial(),
                                         ));
                                     _emailController.clear();
                                     _passwordController.clear();

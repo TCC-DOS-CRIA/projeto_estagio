@@ -44,6 +44,7 @@ dependencies:
   dio: ^4.0.6
   cached_network_image: ^3.2.1
   url_launcher: ^6.1.5
+  clip_shadow: ^0.2.1
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,9 @@ flutter:
   - imagens/sorvetes.png
   - imagens/giphy.gif
   - imagens/splash.gif
+  - imagens/croissantchocolate.jpg
+  - imagens/strogonoff.jpg
+  - imagens/paoqueijo.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

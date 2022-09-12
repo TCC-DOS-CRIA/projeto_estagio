@@ -88,7 +88,7 @@ class _HomeListState extends State<HomeList> {
               child: Column(children: <Widget>[
             Container(
               color: Colors.grey[300],
-              height: Get.height / 1,
+              height: Get.height / 1.2,
               child: GridView.builder(
                 physics: ScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -141,7 +141,7 @@ class _HomeListState extends State<HomeList> {
                                   height: 30,
                                 ),
                                 Text(
-                                  '${produto.preco.toString()}',
+                                  'R\$ ${produto.preco.toString()}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 23.0,

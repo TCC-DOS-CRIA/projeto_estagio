@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_estagio/Inicio/inicio.dart';
 import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
 import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/home/home_page.dart';
@@ -50,7 +51,7 @@ class _NavBarState extends State<BottomNavBar> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => new Home(),
+                  builder: (context) => new Inicial(),
                 ));
             break;
           case 1:
