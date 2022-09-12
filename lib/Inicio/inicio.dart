@@ -47,7 +47,7 @@ class _SplashScreenState extends State<Inicial> {
               children: [
                 const Spacer(),
                 const Text(
-                  "Choose your favourite dishes\nfrom the nearest restorant\nor cafe.",
+                  "Escolha seus pratos favoritos\nde forma rápida e eficiente.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18,
@@ -115,7 +115,7 @@ class _SplashScreenState extends State<Inicial> {
       height: 6,
       width: currentpage == index ? 20 : 6,
       decoration: BoxDecoration(
-          color: currentpage == index ? Colors.black : Colors.white,
+          color: currentpage == index ? Colors.black : Colors.grey,
           borderRadius: BorderRadius.circular(20)),
     );
   }

@@ -43,6 +43,7 @@ class _HomeListState extends State<HomeList> {
           ),
           appBar: AppBar(
             automaticallyImplyLeading: false,
+            backgroundColor: Color.fromARGB(255, 111, 174, 255),
             title: Text('Carrinho'),
             actions: <Widget>[
               GetBuilder<HomeController>(

@@ -115,8 +115,6 @@ class LoginPage extends StatelessWidget {
                               int deuCerto = await Integracoes.realizarLogin(
                                   _emailController.text,
                                   _passwordController.text);
-                              Usuario_model usu =
-                                  await Integracoes.buscarUsuario();
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }

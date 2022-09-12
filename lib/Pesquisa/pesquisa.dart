@@ -91,7 +91,7 @@ class Pesquisa extends SearchDelegate<String> {
                         Image.network(snapshot.data![index]['img_produto']),
                     title: Text(snapshot.data![index]['nome']),
                     subtitle: Text(snapshot.data![index]['descricao']),
-                    trailing: Text(snapshot.data![index]['preco'].toString()),
+                    trailing: Text("R\$"+snapshot.data![index]['preco'].toString()),
                   );
                 }));
           } else if (snapshot.hasError) {

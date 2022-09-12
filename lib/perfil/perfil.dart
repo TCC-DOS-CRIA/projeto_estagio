@@ -199,43 +199,7 @@ class _PerfilState extends State<Perfil> {
                       ],
                     ),
                     Divider(),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Icon(Icons.settings, color: Colors.black)
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Configurações',
-                                style: TextStyle(
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                              Text(
-                                'Gerenciar, limpar histórico...   ',
-                                style: TextStyle(
-                                    color: Colors.grey[400],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Icon(
-                                Icons.arrow_forward_ios_sharp,
-                                color: Colors.grey,
-                                size: 25,
-                              ),
-                            ],
-                          ),
-                        ]),
+                    
                   ],
                 ),
               )
