@@ -106,15 +106,26 @@ class _HomeListState extends State<HomeList> {
                         Column(
                           children: [
                             Expanded(
-                              child: CachedNetworkImage(
-                                imageUrl: produto.img_produto.toString(),
-                                fit: BoxFit.cover,
-                                placeholder: (_, __) {
-                                  return Center(
-                                      child: CupertinoActivityIndicator(
-                                    radius: 15,
-                                  ));
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => new Detalhes(),
+                                      ));
+                                  _.detalhes.clear();
+                                  _.listaDetalhes(index, true);
                                 },
+                                child: CachedNetworkImage(
+                                  imageUrl: produto.img_produto.toString(),
+                                  fit: BoxFit.cover,
+                                  placeholder: (_, __) {
+                                    return Center(
+                                        child: CupertinoActivityIndicator(
+                                      radius: 15,
+                                    ));
+                                  },
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -125,16 +136,7 @@ class _HomeListState extends State<HomeList> {
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 20.0),
                             ),
-                            TextButton(
-                                child: Text('Mais detalhes'),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Detalhes()));
-                                  _.detalhes.clear();
-                                  _.listaDetalhes(index, true);
-                                }),
+                            
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

@@ -183,7 +183,7 @@ class Cadastro extends StatelessWidget {
                       controller: _passwordController,
                       minLength: 6,
                       width: 300,
-                      height: 20,
+                      height: 40,
                       onSuccess: () {
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                             content: new Text("Senha válida")));
