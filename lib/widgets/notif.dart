@@ -26,13 +26,34 @@ class _State extends State<Notif> {
     isSwitched = usuario.notificacao;
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Configuração das Notificações'),
           backgroundColor: fundo,
         ),
-        body: Row(
+        body: Column(
           children: [
-            Switch(
+            SizedBox(
+              height: 30,
+            ),
+            Text("Deseja receber nossas notificações? ",
+            textAlign: TextAlign.right,
+            style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0,
+            color: Colors.black),),
+            SizedBox(
+              height: 5,
+            ),
+            Text("Você será notificado quando seu pedido estiver pronto!",
+            style: TextStyle(
+              fontSize: 15.0
+            ),),
+            SizedBox(
+              width: 100,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Switch(
               value: isSwitched,
               onChanged: (valor) {
                 setState(() {
@@ -42,9 +63,14 @@ class _State extends State<Notif> {
                   print(Integracoes.notificacao);
                 });
               },
-              activeTrackColor: Colors.lightGreenAccent,
-              activeColor: Colors.green,
-            )
+              activeTrackColor: Colors.lightBlueAccent,
+              activeColor: Colors.blue,
+            ),
+        ),
+      ),
+            
+            
+            Image(image: new AssetImage("imagens/notif.jpg")),
           ],
         ));
   }

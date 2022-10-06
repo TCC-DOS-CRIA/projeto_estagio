@@ -37,10 +37,10 @@ class HomeController extends GetxController {
   void onReady() {
     if (categoria == "") {
       super.onReady();
-      this.carregarProdutos();
+      carregarProdutos();
     } else {
       super.onReady();
-      this.carregarProdutosCategoria(categoria);
+      carregarProdutosCategoria(categoria);
     }
   }
 

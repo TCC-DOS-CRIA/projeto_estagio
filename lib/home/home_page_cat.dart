@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
-import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/widgets/home_list.dart';
 
 class HomeCategoria extends StatefulWidget {

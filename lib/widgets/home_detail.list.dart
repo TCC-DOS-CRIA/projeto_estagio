@@ -11,7 +11,18 @@ import 'package:projeto_estagio/widgets/home_list.dart';
 
 import '../Integracao_api/integracoes_api.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget{
+  const DetailPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<DetailPage> createState() {
+    return _DetailPageState();
+  }
+}
+
+class _DetailPageState extends State<DetailPage> {
   final _scrollController = ScrollController();
   var _firstScroll = true;
   bool _enabled = false;
@@ -24,6 +35,7 @@ class DetailPage extends StatelessWidget {
       builder: (_) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 111, 174, 255),
             title: Text('Compras'),
             actions: <Widget>[
               GetBuilder<HomeController>(builder: (_) {
@@ -122,7 +134,7 @@ class DetailPage extends StatelessWidget {
                                                 width: 120,
                                                 height: 40,
                                                 decoration: BoxDecoration(
-                                                    color: Colors.red[600],
+                                                    color: Color.fromARGB(255, 255, 151, 119),
                                                     boxShadow: [
                                                       BoxShadow(
                                                         blurRadius: 6.0,
@@ -157,8 +169,11 @@ class DetailPage extends StatelessWidget {
                                                               .quantidade--);
                                                           _.valorTotal();
                                                         }
+                                                        if(_.carrinho[key]!.quantidade == 0){
+                                                          _.carrinho.remove(key);
+                                                        }
                                                       },
-                                                      color: Colors.yellow,
+                                                      color: Color.fromARGB(255, 255, 255, 255),
                                                     ),
                                                     Text(
                                                       "${_.carrinho[key]!.quantidade}",
@@ -177,7 +192,7 @@ class DetailPage extends StatelessWidget {
                                                               .quantidade++);
                                                         _.valorTotal();
                                                       },
-                                                      color: Colors.yellow,
+                                                      color: Color.fromARGB(255, 255, 255, 255),
                                                     ),
                                                     SizedBox(
                                                       height: 8.0,
@@ -203,7 +218,7 @@ class DetailPage extends StatelessWidget {
                               ),
                             ),
                             Divider(
-                              color: Colors.purple,
+                              color: Color.fromARGB(255, 105, 20, 39),
                             )
                           ],
                         );
@@ -238,18 +253,22 @@ class DetailPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 111, 174, 255),
                           elevation: 3,
                           padding: EdgeInsets.only(
                               top: 20, left: 25, right: 25, bottom: 20),
                         ),
                         onPressed: () async {
+                          int deuCerto = await Integracoes.cadastroNovoPedido(
+                              a, _.valorTotal().toDouble());
                           for (var element in _.produtos) {
                             if (element.noCarrinho == true) {
                               a.add(element);
                             }
                           }
-                          int deuCerto = await Integracoes.cadastroNovoPedido(
-                              a, _.valorTotal().toDouble());
+                            if(_.carrinho.isEmpty == true){
+                            deuCerto = 0;
+                           }
                           switch (deuCerto) {
                             case 1:
                               ScaffoldMessenger.of(context).showSnackBar(

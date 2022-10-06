@@ -22,12 +22,14 @@ class Detalhes extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: Color.fromARGB(255, 111, 174, 255),
               leading: IconButton(
                   icon: Icon(Icons.arrow_back,
                       color: Color.fromARGB(255, 255, 255, 255)),
                   onPressed: () async {
                     var nav = Navigator.of(context).pop();
                   }),
+                  centerTitle: true,
               title: Text('Detalhes'),
               actions: <Widget>[
                 GetBuilder<HomeController>(
@@ -186,6 +188,7 @@ class Detalhes extends StatelessWidget {
               ),
             ),
           );
-        });
+        }
+      );
   }
 }

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projeto_estagio">
    <application
-        android:label="projeto_estagio"
+        android:label="WAVE"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

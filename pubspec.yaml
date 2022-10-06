@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_masked_text: ^0.7.0
   flutter_pw_validator: ^1.4.2
   email_validator: '^2.1.16'
   flutter:
@@ -89,6 +90,7 @@ flutter:
   - imagens/croissantchocolate.jpg
   - imagens/strogonoff.jpg
   - imagens/paoqueijo.jpg
+  - imagens/notif.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

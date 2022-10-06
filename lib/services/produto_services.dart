@@ -29,9 +29,9 @@ class ProdutoServices {
 
   Future<List<ProdutoModel>> getProdutosByCategoria(String cat) async {
     try {
-      final Response response = await this._dio.get(
-          'https://app-projetosestagio-api.herokuapp.com/getProdutoByCategoria/' +
-              cat);
+      final Response response = await this
+          ._dio
+          .get('https://app-projetosestagio-api.herokuapp.com/getProdutoByCategoria/$cat');
 
       List<ProdutoModel> a =
           (response.data as List).map((e) => ProdutoModel.fromJson(e)).toList();

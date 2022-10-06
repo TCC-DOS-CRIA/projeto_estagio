@@ -3,6 +3,7 @@ import 'package:projeto_estagio/Inicio/inicio.dart';
 import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
 import 'package:projeto_estagio/home/home.dart';
 import 'package:projeto_estagio/home/home_page.dart';
+import 'package:projeto_estagio/home/home_page_cat.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
 import 'package:projeto_estagio/widgets/categorias.dart';
 import 'package:projeto_estagio/widgets/home_list.dart';
@@ -62,7 +63,7 @@ class _NavBarState extends State<BottomNavBar> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => new HomePage(),
+                  builder: (context) => new HomeCategoria(categoria: ""),
                 ));
             HomePage.setState();
             break;

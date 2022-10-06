@@ -34,14 +34,14 @@ class _PaginaInicialState extends State<PaginaInicial> {
         centerTitle: true,
         title: Text(
           'Itens do cardápio',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white),
         ),
         elevation: 0,
-        backgroundColor: Colors.black12,
+        backgroundColor: Color.fromARGB(255, 111, 174, 255),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
-            color: Colors.black,
+            color: Colors.white,
             onPressed: () {
               showSearch(
                 context: context,

@@ -44,6 +44,7 @@ class _HomeListState extends State<HomeList> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Color.fromARGB(255, 111, 174, 255),
+            centerTitle: true,
             title: Text('Carrinho'),
             actions: <Widget>[
               GetBuilder<HomeController>(
@@ -108,7 +109,7 @@ class _HomeListState extends State<HomeList> {
                             Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.pushReplacement(
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => new Detalhes(),

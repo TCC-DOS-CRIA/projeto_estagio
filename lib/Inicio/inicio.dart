@@ -1,5 +1,6 @@
 import 'package:clip_shadow/clip_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_estagio/home/home_page_cat.dart';
 import 'package:projeto_estagio/login/login.dart';
 
 import '../home/home_page.dart';
@@ -77,7 +78,7 @@ class _SplashScreenState extends State<Inicial> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomePage()));
+                              builder: (context) => HomeCategoria(categoria: "",)));
                     },
                     child: const Text(
                       "Produtos",
@@ -135,7 +136,7 @@ class SplashImgs extends StatelessWidget {
         BoxShadow(
           blurRadius: 10.0,
           spreadRadius: 10.0,
-          color: Colors.black.withOpacity(0.3),
+          color: Colors.white.withOpacity(1.0),
         )
       ],
       clipper: ClipperClass(),
