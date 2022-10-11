@@ -39,7 +39,7 @@ class Cadastro extends StatelessWidget {
             child: Text(
               'Cadastro',
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
+              style: TextStyle(fontFamily: 'Poppins', fontSize: 35, fontWeight: FontWeight.w400),
             ),
           ),
           SizedBox(
@@ -48,7 +48,7 @@ class Cadastro extends StatelessWidget {
           SizedBox(
             child: Text("Crie uma nova conta",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w300)),
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Color.fromARGB(255, 53, 51, 51), fontWeight: FontWeight.w300)),
           ),
           SizedBox(
             height: 30,
@@ -69,6 +69,7 @@ class Cadastro extends StatelessWidget {
                             icon: Icon(Icons.person),
                             labelText: "Nome",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -98,6 +99,7 @@ class Cadastro extends StatelessWidget {
                             icon: Icon(Icons.email),
                             labelText: "Email",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -130,6 +132,7 @@ class Cadastro extends StatelessWidget {
                             icon: Icon(Icons.phone),
                             labelText: "Telefone",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -161,6 +164,7 @@ class Cadastro extends StatelessWidget {
                             icon: Icon(Icons.key),
                             labelText: "Senha",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -194,7 +198,7 @@ class Cadastro extends StatelessWidget {
                     ),
                   ]),
                   SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   Container(
                     height: 70,
@@ -209,6 +213,7 @@ class Cadastro extends StatelessWidget {
                             icon: Icon(Icons.key),
                             labelText: "Confirmar senha",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,

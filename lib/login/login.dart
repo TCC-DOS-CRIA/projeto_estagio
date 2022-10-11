@@ -31,13 +31,13 @@ class LoginPage extends StatelessWidget {
               width: 128,
               height: 60,
               child: Text(
-                'Ola!',
+                'Bem vindo!',
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 35, fontWeight: FontWeight.w400),
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             SizedBox(
                 height: 50,
@@ -45,9 +45,9 @@ class LoginPage extends StatelessWidget {
                 child: Text('Faça login para continuar',
                     textAlign: TextAlign.left,
                     style:
-                        TextStyle(fontSize: 21, fontWeight: FontWeight.w300))),
+                        TextStyle(fontFamily: 'Poppins', fontSize: 21, fontWeight: FontWeight.w300))),
             SizedBox(
-              height: 50,
+              height: 55,
             ),
             Form(
                 key: formKey,
@@ -61,6 +61,7 @@ class LoginPage extends StatelessWidget {
                           icon: Icon(Icons.email),
                           labelText: "E-mail",
                           labelStyle: TextStyle(
+                            fontFamily: 'Poppins',
                             color: Colors.black45,
                             fontWeight: FontWeight.w400,
                             fontSize: 20,
@@ -85,6 +86,7 @@ class LoginPage extends StatelessWidget {
                             icon: Icon(Icons.key),
                             labelText: "Senha",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -123,7 +125,9 @@ class LoginPage extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
-                                              "Login realizado com sucesso"),
+                                              "Login realizado com sucesso",
+                                               style: TextStyle(
+                                              fontFamily: 'Gotham')),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -142,7 +146,9 @@ class LoginPage extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content:
-                                              Text("Email ou senha inválidos"),
+                                              Text("Email ou senha inválidos", style: TextStyle(
+                                                fontFamily: 'Gotham'
+                                              ),),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -153,7 +159,9 @@ class LoginPage extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
-                                              "Redirecionando para cadastro de nova senha"),
+                                              "Redirecionando para cadastro de nova senha",
+                                               style: TextStyle(
+                                                fontFamily: 'Gotham')),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -178,7 +186,8 @@ class LoginPage extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
-                                              "Erro ao autenticar usuário"),
+                                              "Erro ao autenticar usuário", style: TextStyle(
+                                                fontFamily: 'Gotham')),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -189,7 +198,7 @@ class LoginPage extends StatelessWidget {
                           },
                           child: Text(
                             'Entrar',
-                            style: TextStyle(fontSize: 17),
+                            style: TextStyle(fontFamily: 'Gotham', fontSize: 17),
                           ),
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -208,7 +217,7 @@ class LoginPage extends StatelessWidget {
                       child: TextButton(
                           child: Text(
                             'Esqueceu a senha?',
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -230,15 +239,17 @@ class LoginPage extends StatelessWidget {
                 Container(
                   alignment: Alignment.bottomLeft,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         'Não possui conta?',
-                        style: TextStyle(fontSize: 13, color: Colors.black45),
+                        style: TextStyle(fontFamily: 'Poppins', fontSize: 12, color: Color.fromARGB(221, 0, 0, 0)),
                       ),
                       InkWell(
                           child: Text(
                             'Clique aqui para se cadastrar',
-                            style: TextStyle(fontSize: 13),
+                            textAlign: TextAlign.right,
+                            style: TextStyle(fontFamily: 'Poppins', fontSize: 12,fontWeight: FontWeight.bold),
                           ),
                           onTap: () => Navigator.push(
                               context,

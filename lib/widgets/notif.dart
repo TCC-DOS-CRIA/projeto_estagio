@@ -28,25 +28,28 @@ class _State extends State<Notif> {
     return Scaffold(
       backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Configuração das Notificações'),
+          centerTitle: true,
+          title: const Text('Notificações', style: TextStyle(fontFamily: 'Gotham'),),
           backgroundColor: fundo,
         ),
         body: Column(
           children: [
             SizedBox(
-              height: 30,
+              height: 40,
             ),
-            Text("Deseja receber nossas notificações? ",
+            Text("Deseja receber nossas notificações?",
             textAlign: TextAlign.right,
             style: TextStyle(
+              fontFamily: 'Gotham',
             fontWeight: FontWeight.bold,
-            fontSize: 20.0,
+            fontSize: 19.0,
             color: Colors.black),),
             SizedBox(
               height: 5,
             ),
-            Text("Você será notificado quando seu pedido estiver pronto!",
+            Text("Seja notificado quando seu pedido estiver pronto!",
             style: TextStyle(
+              fontFamily: 'Poppins',
               fontSize: 15.0
             ),),
             SizedBox(

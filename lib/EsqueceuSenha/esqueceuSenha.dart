@@ -37,7 +37,7 @@ class EsqueceuSenha extends StatelessWidget {
             child: Text(
               "Encontre sua Conta",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 22),
+              style: TextStyle(fontFamily: 'Poppins', fontSize: 24),
             ),
           ),
           SizedBox(
@@ -45,7 +45,7 @@ class EsqueceuSenha extends StatelessWidget {
           ),
           SizedBox(
             child: Text("Digite seu e-mail de recuperação",
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
+                textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Poppins', fontSize: 18)),
           ),
           SizedBox(
             height: 50,
@@ -67,9 +67,10 @@ class EsqueceuSenha extends StatelessWidget {
                           ),
                           labelText: "E-mail",
                           labelStyle: TextStyle(
+                            fontFamily: 'Poppins',
                             color: Colors.black45,
                             fontWeight: FontWeight.w400,
-                            fontSize: 15,
+                            fontSize: 18,
                           )),
                       style: TextStyle(fontSize: 20),
                       validator: (String? value) {
@@ -129,7 +130,7 @@ class EsqueceuSenha extends StatelessWidget {
                           },
                           child: Text(
                             'Enviar',
-                            style: TextStyle(fontSize: 17),
+                            style: TextStyle(fontFamily: 'Gotham',fontSize: 17),
                           ),
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(

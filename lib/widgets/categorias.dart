@@ -34,7 +34,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
         centerTitle: true,
         title: Text(
           'Itens do cardápio',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(fontFamily: 'Gotham', color: Colors.white),
         ),
         elevation: 0,
         backgroundColor: Color.fromARGB(255, 111, 174, 255),

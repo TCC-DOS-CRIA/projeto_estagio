@@ -36,7 +36,8 @@ class _DetailPageState extends State<DetailPage> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 111, 174, 255),
-            title: Text('Compras'),
+            centerTitle: true,
+            title: Text('Compras', style: TextStyle( fontFamily: 'Gotham'),),
             actions: <Widget>[
               GetBuilder<HomeController>(builder: (_) {
                 return Padding(
@@ -96,10 +97,11 @@ class _DetailPageState extends State<DetailPage> {
                         return Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Expanded(
                                           child: Container(
@@ -109,7 +111,8 @@ class _DetailPageState extends State<DetailPage> {
                                             imageUrl: _
                                                 .carrinho[key]!.img_produto
                                                 .toString(),
-                                            fit: BoxFit.cover,
+                                            width: 150,
+                                            height: 100,
                                             placeholder: (_, __) {
                                               return Center(
                                                   child:
@@ -118,31 +121,34 @@ class _DetailPageState extends State<DetailPage> {
                                               ));
                                             }),
                                       )),
-                                      SizedBox(width: 5),
+                                      SizedBox(width: 10),
                                       Column(
                                         children: [
                                           Text(
                                             '${_.carrinho[key]!.nome.toString()}',
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(fontSize: 20.0),
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 20.0),
                                           ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                        'R\$ ${_.carrinho[key]!.preco.toInt()}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontFamily: 'Gotham', fontSize: 20.0),
+                                      ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.end,
                                             children: <Widget>[
-                                              Container(
+                                              Center(
+                                                child: Container(
                                                 width: 120,
                                                 height: 40,
                                                 decoration: BoxDecoration(
-                                                    color: Color.fromARGB(255, 255, 151, 119),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 6.0,
-                                                        color: Colors.blue,
-                                                        offset:
-                                                            Offset(0.0, 1.0),
-                                                      )
-                                                    ],
+                                                    color: Colors.grey[200],
                                                     borderRadius:
                                                         BorderRadius.all(
                                                       Radius.circular(50.0),
@@ -152,14 +158,13 @@ class _DetailPageState extends State<DetailPage> {
                                                 padding: EdgeInsets.all(2.0),
                                                 child: new Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                      MainAxisAlignment.spaceBetween,
                                                   children: <Widget>[
                                                     SizedBox(
                                                       height: 8.0,
                                                     ),
                                                     IconButton(
-                                                      icon: Icon(Icons.remove),
+                                                      icon: Icon(Icons.remove, color: Colors.red,),
                                                       onPressed: () {
                                                         if (_.carrinho[key]!
                                                                 .quantidade >
@@ -173,15 +178,16 @@ class _DetailPageState extends State<DetailPage> {
                                                           _.carrinho.remove(key);
                                                         }
                                                       },
-                                                      color: Color.fromARGB(255, 255, 255, 255),
+                                                      color: Color.fromARGB(255, 0, 110, 255),
                                                     ),
                                                     Text(
                                                       "${_.carrinho[key]!.quantidade}",
                                                       style: TextStyle(
+                                                        fontFamily: 'Gotham',
                                                           fontSize: 16.0),
                                                     ),
                                                     IconButton(
-                                                      icon: Icon(Icons.add),
+                                                      icon: Icon(Icons.add, color: Color.fromARGB(255, 111, 174, 255),),
                                                       onPressed: () {
                                                         if (_.carrinho[key]!
                                                                 .quantidade <
@@ -199,7 +205,8 @@ class _DetailPageState extends State<DetailPage> {
                                                     )
                                                   ],
                                                 ),
-                                              )
+                                              ))
+                                              
                                             ],
                                           )
                                         ],
@@ -207,11 +214,7 @@ class _DetailPageState extends State<DetailPage> {
                                       SizedBox(
                                         width: 38.0,
                                       ),
-                                      Text(
-                                        '\$ ${_.carrinho[key]!.preco.toInt()}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20.0),
-                                      ),
+                                      
                                     ],
                                   )
                                 ],
@@ -238,8 +241,9 @@ class _DetailPageState extends State<DetailPage> {
                     child: Row(
                       children: <Widget>[
                         Text(
-                          'Total: \$${_.valorTotal().toInt()}',
+                          'Total: R\$${_.valorTotal().toInt()}',
                           style: TextStyle(
+                            fontFamily: 'Gotham',
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                           ),
@@ -314,7 +318,7 @@ class _DetailPageState extends State<DetailPage> {
                               break;
                           }
                         },
-                        child: Text("Fazer Pedido")),
+                        child: Text("Fazer Pedido", style: TextStyle(fontFamily: 'Gotham', fontSize: 15))),
                   )
                 ],
               ),

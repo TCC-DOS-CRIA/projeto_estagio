@@ -30,7 +30,7 @@ class Detalhes extends StatelessWidget {
                     var nav = Navigator.of(context).pop();
                   }),
                   centerTitle: true,
-              title: Text('Detalhes'),
+              title: Text('Detalhes', style: TextStyle(fontFamily: 'Gotham')),
               actions: <Widget>[
                 GetBuilder<HomeController>(
                     id: 'carrinho',
@@ -95,20 +95,22 @@ class Detalhes extends StatelessWidget {
                           return Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Expanded(
                                             child: Container(
                                           height: 150,
-                                          width: 10,
+                                          width: 150,
                                           child: CachedNetworkImage(
                                               imageUrl: _
                                                   .detalhes[key]!.img_produto
                                                   .toString(),
-                                              fit: BoxFit.cover,
+                                              width: 150,
+                                              height: 100,
                                               placeholder: (_, __) {
                                                 return Center(
                                                     child:
@@ -123,11 +125,7 @@ class Detalhes extends StatelessWidget {
                                             Text(
                                               '${_.detalhes[key]!.nome.toString()}',
                                               textAlign: TextAlign.center,
-                                              style: TextStyle(fontSize: 20.0),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              style: TextStyle(fontFamily: 'Poppins', fontSize: 20.0),
                                             ),
                                             SizedBox(
                                               height: 5.0,
@@ -136,10 +134,13 @@ class Detalhes extends StatelessWidget {
                                             Text(
                                               '\$ ${_.detalhes[key]!.preco.toInt()}',
                                               textAlign: TextAlign.center,
-                                              style: TextStyle(fontSize: 20.0),
+                                              style: TextStyle(fontFamily: 'Gotham', fontSize: 20.0),
                                             ),
                                           ],
                                         ),
+                                        SizedBox(
+                                          width: 45,
+                                        )
                                       ],
                                     ),
                                     Divider(
@@ -147,10 +148,13 @@ class Detalhes extends StatelessWidget {
                                     ),
                                     Column(
                                       children: [
+                                        SizedBox(
+                                          height: 9.0,
+                                        ),
                                         Text(
                                           '${_.detalhes[key]!.categoria.toString()}',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 15.0),
+                                          style: TextStyle(fontFamily: 'Book', fontSize: 15.0),
                                         ),
                                         SizedBox(
                                           height: 10.0,
@@ -158,7 +162,7 @@ class Detalhes extends StatelessWidget {
                                         Text(
                                           '${_.detalhes[key]!.descricao.toString()}',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20.0),
+                                          style: TextStyle(fontFamily: 'Poppins', fontSize: 20.0),
                                         ),
                                         SizedBox(
                                           height: 10.0,

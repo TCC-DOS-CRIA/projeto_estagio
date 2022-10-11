@@ -37,6 +37,7 @@ class _SplashPageState extends State<SplashPage> {
             Text(
               'Carregando...',
               style: TextStyle(
+                fontFamily: 'Gotham',
                 fontSize: 22.0,
                 fontWeight: FontWeight.bold,
               ),

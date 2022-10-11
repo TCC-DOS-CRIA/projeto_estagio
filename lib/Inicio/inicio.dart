@@ -51,6 +51,7 @@ class _SplashScreenState extends State<Inicial> {
                   "Escolha seus pratos favoritos\nde forma rápida e eficiente.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                      fontFamily: 'Poppins',
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.black),
@@ -61,6 +62,7 @@ class _SplashScreenState extends State<Inicial> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     3,
+                    
                     (index) => dotContainer(index: index),
                   ),
                 ),
@@ -73,7 +75,7 @@ class _SplashScreenState extends State<Inicial> {
                         borderRadius: BorderRadius.circular(50.0)),
                     minWidth: double.infinity,
                     height: 50,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 111, 174, 255),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -83,6 +85,7 @@ class _SplashScreenState extends State<Inicial> {
                     child: const Text(
                       "Produtos",
                       style: TextStyle(
+                        fontFamily: 'Gotham',
                           color: Colors.white,
                           fontSize: 17,
                           fontWeight: FontWeight.w600),
@@ -116,7 +119,7 @@ class _SplashScreenState extends State<Inicial> {
       height: 6,
       width: currentpage == index ? 20 : 6,
       decoration: BoxDecoration(
-          color: currentpage == index ? Colors.black : Colors.grey,
+          color: currentpage == index ? Color.fromARGB(255, 16, 56, 109 ): Color.fromARGB(144, 175, 210, 255),
           borderRadius: BorderRadius.circular(20)),
     );
   }
@@ -136,7 +139,7 @@ class SplashImgs extends StatelessWidget {
         BoxShadow(
           blurRadius: 10.0,
           spreadRadius: 10.0,
-          color: Colors.white.withOpacity(1.0),
+          color: Colors.white.withOpacity(0.3),
         )
       ],
       clipper: ClipperClass(),

@@ -41,7 +41,7 @@ class _PerfilState extends State<Perfil> {
           centerTitle: true,
           title: Text(
             'MEU PERFIL',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: TextStyle(fontFamily: 'Gotham', color: Colors.white, fontWeight: FontWeight.bold),
           ),
           elevation: 0,
           backgroundColor: fundo,
@@ -78,6 +78,7 @@ class _PerfilState extends State<Perfil> {
                       child: Text(
                         usuario!.nome,
                         style: TextStyle(
+                            fontFamily: 'Gotham',
                             color: Colors.black,
                             fontSize: 24,
                             fontWeight: FontWeight.bold),
@@ -87,7 +88,7 @@ class _PerfilState extends State<Perfil> {
                       padding: const EdgeInsets.only(top: 1, bottom: 32),
                       child: Text(
                         usuario!.email,
-                        style: TextStyle(color: Color.fromARGB(146, 0, 0, 0)),
+                        style: TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(146, 0, 0, 0)),
                       ),
                     ),
                   ],
@@ -122,6 +123,7 @@ class _PerfilState extends State<Perfil> {
                             Text(
                               'Notificações',
                               style: TextStyle(
+                                fontFamily: 'Gotham',
                                   color: Colors.black87,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
@@ -129,6 +131,7 @@ class _PerfilState extends State<Perfil> {
                             Text(
                               'Minha central de notificações',
                               style: TextStyle(
+                                fontFamily: 'Poppins',
                                 color: Colors.grey[400],
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,
@@ -173,6 +176,7 @@ class _PerfilState extends State<Perfil> {
                             Text(
                               'Meus Dados',
                               style: TextStyle(
+                                fontFamily: 'Gotham',
                                   color: Colors.black87,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
@@ -180,6 +184,7 @@ class _PerfilState extends State<Perfil> {
                             Text(
                               'Minhas informações de conta',
                               style: TextStyle(
+                                fontFamily: 'Poppins',
                                 color: Colors.grey[400],
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,

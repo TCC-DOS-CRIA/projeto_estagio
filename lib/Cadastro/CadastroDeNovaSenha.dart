@@ -46,7 +46,7 @@ class CadastroDeNovaSenha extends StatelessWidget {
             child: Text(
               'Cadastrar uma nova senha',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
+              style: TextStyle(fontFamily: 'Poppins', fontSize: 35, fontWeight: FontWeight.w400),
             ),
           ),
           SizedBox(
@@ -72,6 +72,7 @@ class CadastroDeNovaSenha extends StatelessWidget {
                             icon: Icon(Icons.key),
                             labelText: "Senha",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -102,6 +103,7 @@ class CadastroDeNovaSenha extends StatelessWidget {
                             icon: Icon(Icons.key),
                             labelText: "Confirmar senha",
                             labelStyle: TextStyle(
+                              fontFamily: 'Poppins',
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,

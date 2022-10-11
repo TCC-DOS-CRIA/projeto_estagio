@@ -45,7 +45,7 @@ class _HomeListState extends State<HomeList> {
             automaticallyImplyLeading: false,
             backgroundColor: Color.fromARGB(255, 111, 174, 255),
             centerTitle: true,
-            title: Text('Carrinho'),
+            title: Text('Carrinho', style: TextStyle(fontFamily: 'Gotham', fontSize: 22),),
             actions: <Widget>[
               GetBuilder<HomeController>(
                   id: 'carrinho',
@@ -135,7 +135,7 @@ class _HomeListState extends State<HomeList> {
                             Text(
                               '${produto.nome.toString()}',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(fontFamily: 'Book', fontSize: 20.0),
                             ),
                             
                             Row(
@@ -146,9 +146,11 @@ class _HomeListState extends State<HomeList> {
                                 ),
                                 Text(
                                   'R\$ ${produto.preco.toString()}',
+                                  textAlign: TextAlign.right,
                                   style: TextStyle(
+                                    fontFamily: 'Gotham',
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 23.0,
+                                      fontSize: 20.0,
                                       color: Colors.black),
                                 ),
                                 Padding(
