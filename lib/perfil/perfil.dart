@@ -5,6 +5,7 @@ import 'package:projeto_estagio/appBar/AppBar.dart';
 import 'package:projeto_estagio/home/home_page.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
 import 'package:projeto_estagio/widgets/home_list.dart';
+import 'package:projeto_estagio/widgets/meusdados.dart';
 import 'package:projeto_estagio/widgets/notif.dart';
 
 class Perfil extends StatefulWidget {
@@ -164,9 +165,16 @@ class _PerfilState extends State<Perfil> {
                       children: [
                         Column(
                           children: <Widget>[
-                            Icon(
-                              Icons.description_outlined,
+                            IconButton(
+                              icon: Icon(Icons.description_outlined,
                               color: Colors.black,
+                            ),
+                            onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Dados(usuario!)));
+                              },
                             )
                           ],
                         ),
@@ -194,11 +202,20 @@ class _PerfilState extends State<Perfil> {
                         ),
                         Column(
                           children: <Widget>[
-                            Icon(
+                            IconButton(
+                              icon: Icon(
                               Icons.arrow_forward_ios_sharp,
                               color: Colors.grey,
                               size: 25,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Dados(usuario!)));
+                              },
                             ),
+                            
                           ],
                         ),
                       ],

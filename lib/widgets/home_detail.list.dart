@@ -278,7 +278,7 @@ class _DetailPageState extends State<DetailPage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content:
-                                          Text("Pedido cadastrado com sucesso"),
+                                          Text("Pedido cadastrado com sucesso", style: TextStyle(fontFamily: 'Gotham')),
                                       action: SnackBarAction(
                                         label: "",
                                         onPressed: () {},
