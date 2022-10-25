@@ -56,15 +56,13 @@ class Integracoes {
   static Future<int> cadastroNovoPedido(
       List<ProdutoModel> list, double preco) async {
     try {
+      print(list);
+
       String url = "https://app-projetosestagio-api.herokuapp.com/venda";
       HttpClient httpClient = new HttpClient();
       HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
       request.headers.set('content-type', 'application/json');
-      Map<String, dynamic> body = {
-        "email": emailUsu,
-        "preco": preco,
-        "produtos": list
-      };
+      Map<String, Object> body = {"produtos": list, "preco": preco, "email":emailUsu};
       request.add(utf8.encode(json.encode(body)));
       HttpClientResponse response = await request.close();
       String reply = await response.transform(utf8.decoder).join();
