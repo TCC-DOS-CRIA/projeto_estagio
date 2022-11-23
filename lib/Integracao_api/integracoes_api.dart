@@ -178,4 +178,29 @@ class Integracoes {
       print(e);
     }
   }
+  
+  @override
+  static Future<List<dynamic>> buscarPedidos() async {
+    var url =
+        Uri.parse('https://app-projetosestagio-api.herokuapp.com/pedidos/$emailUsu');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+       List<dynamic> dados = jsonDecode(utf8.decode(response.bodyBytes));
+       return dados;
+    } else {
+      throw Exception("Erro ao trazer usuarios");
+    }
+  }
+
+  static Future<List<dynamic>> buscarItens(dado)async {
+    var url =
+        Uri.parse('https://app-projetosestagio-api.herokuapp.com/itensVenda/$dado');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+       List<dynamic> dados = jsonDecode(utf8.decode(response.bodyBytes));
+       return dados;
+    } else {
+      throw Exception("Erro ao trazer usuarios");
+    }
+  }
 }
