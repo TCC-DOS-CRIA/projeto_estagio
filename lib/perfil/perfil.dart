@@ -169,11 +169,14 @@ class _PerfilState extends State<Perfil> {
                               icon: Icon(Icons.description_outlined,
                               color: Colors.black,
                             ),
-                            onPressed: () {
+                            onPressed: () async {
+                              List<dynamic> dados = await Integracoes.buscarPedidos();
+                              List<dynamic> itens = await Integracoes.buscarItens(dados[3]);
+                              print(dados);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Dados(usuario!)));
+                                        builder: (context) => Dados(usuario!,dados, itens)),);
                               },
                             )
                           ],
@@ -208,11 +211,12 @@ class _PerfilState extends State<Perfil> {
                               color: Colors.grey,
                               size: 25,
                               ),
-                              onPressed: () {
+                              onPressed: () async{
+                                List<dynamic> dados = await Integracoes.buscarPedidos();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Dados(usuario!)));
+                                        builder: (context) => Dados(usuario!,dados)));
                               },
                             ),
                             
