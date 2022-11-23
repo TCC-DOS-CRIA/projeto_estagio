@@ -79,26 +79,22 @@ class _State extends State<Dados> {
                           SizedBox(width: 10),
                           Column(
                             children: [
-                              Text(
-                                '${dados[key][1]!}',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 20.0),
-                              ),
+                              
                               SizedBox(
                                 width: 10,
                               ),
                               Text(
-                                ' ${dados[key][2]!}'.substring(0, 11),
+                                ' ${dados[key][3]!}'.substring(0, 11),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontFamily: 'Gotham', fontSize: 20.0),
                               ),
-                              Text(' ${itens[0][1]!}',
+                               Text(
+                                '${dados[key][6]!} - '+'${dados[key][5]!}',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontFamily: 'Gotham', fontSize: 20.0),)
-                                    
+                                    fontFamily: 'Poppins', fontSize: 20.0),
+                              ),       
                             ]
                           ),
                           SizedBox(

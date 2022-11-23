@@ -119,7 +119,7 @@ class Integracoes {
   }
 
   @override
-  static Future<bool> cadastroNovoUsuario(nome, email, senha, telefone) async {
+  static Future<int> cadastroNovoUsuario(nome, email, senha, telefone) async {
     try {
       String url = "https://app-projetosestagio-api.herokuapp.com/usuario";
       Map<String, Object> body = {
@@ -137,10 +137,10 @@ class Integracoes {
       HttpClientResponse response = await request.close();
       String reply = await response.transform(utf8.decoder).join();
       httpClient.close();
-      bool resposta = json.decode(reply);
+      int resposta = json.decode(reply);
       return resposta;
     } catch (e) {
-      return false;
+      return 0;
     }
   }
 

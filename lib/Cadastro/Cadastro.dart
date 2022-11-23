@@ -11,7 +11,7 @@ class Cadastro extends StatelessWidget {
   final _passwordController = TextEditingController();
   final _phoneController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
+  var auxEmail = false;
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class Cadastro extends StatelessWidget {
         child: ListView(children: <Widget>[
           SizedBox(
             width: 128,
-            height: 40,
+            height: 50,
             child: Text(
               'Cadastro',
               textAlign: TextAlign.left,
@@ -113,6 +113,10 @@ class Cadastro extends StatelessWidget {
                           }
                           if (EmailValidator.validate(value) == false) {
                             return 'Email inválido';
+                          }
+                          if(auxEmail == true){
+                            _emailController.text ="";
+                            return 'Email já cadastrado';
                           }
                           return null;
                         }),
@@ -256,12 +260,14 @@ class Cadastro extends StatelessWidget {
                             if (_passwordController.text.compareTo(
                                     _confirmPasswordController.text) ==
                                 0) {
-                              bool a = await Integracoes.cadastroNovoUsuario(
+                              int a = await Integracoes.cadastroNovoUsuario(
                                   _nomeController.text,
                                   _emailController.text,
                                   _passwordController.text,
                                   _phoneController.text);
-                              if (a) {
+                                  
+                              switch (a) {
+                                case 1:
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(
@@ -277,6 +283,27 @@ class Cadastro extends StatelessWidget {
                                           builder: (context) =>
                                               new LoginPage()));
                                 });
+                                break;
+                                case 0:
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "Erro ao cadastrar usuário"),
+                                        action: SnackBarAction(
+                                          label: "",
+                                          onPressed: () {},
+                                        )));
+                                Future.delayed(Duration(seconds: 1), () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new LoginPage()));
+                                });
+                                break;
+                                case -1:
+                                  auxEmail = true;
+                                break;
                               }
                             }
                           }

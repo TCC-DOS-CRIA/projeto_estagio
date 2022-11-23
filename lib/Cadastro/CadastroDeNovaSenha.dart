@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/login/login.dart';
 
@@ -42,7 +43,7 @@ class CadastroDeNovaSenha extends StatelessWidget {
           ),
           SizedBox(
             width: 128,
-            height: 95,
+            height: 110,
             child: Text(
               'Cadastrar uma nova senha',
               textAlign: TextAlign.center,
@@ -87,6 +88,22 @@ class CadastroDeNovaSenha extends StatelessWidget {
                           return null;
                         }),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  new FlutterPwValidator(
+                      controller: senha,
+                      minLength: 6,
+                      width: 300,
+                      height: 40,
+                      onSuccess: () {
+                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+                            content: new Text("Senha válida")));
+                      },
+                      onFail: () {
+                        print("Senha inválida");
+                      },
+                    ),
                   SizedBox(
                     height: 30,
                   ),

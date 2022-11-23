@@ -171,12 +171,11 @@ class _PerfilState extends State<Perfil> {
                             ),
                             onPressed: () async {
                               List<dynamic> dados = await Integracoes.buscarPedidos();
-                              List<dynamic> itens = await Integracoes.buscarItens(dados[3]);
                               print(dados);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Dados(usuario!,dados, itens)),);
+                                        builder: (context) => Dados(usuario!,dados)),);
                               },
                             )
                           ],
