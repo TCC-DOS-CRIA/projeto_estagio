@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:js/js.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,7 @@ class Detalhes extends StatelessWidget {
   var _firstScroll = true;
   bool _enabled = false;
   List<ProdutoModel> a = [];
+  var f = NumberFormat('##0.00', 'pt');
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +134,7 @@ class Detalhes extends StatelessWidget {
                                               width: 38.0,
                                             ),
                                             Text(
-                                              '\$ ${_.detalhes[key]!.preco.toInt()}',
+                                              'R\$ ${f.format(_.detalhes[key]!.preco)}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(fontFamily: 'Gotham', fontSize: 20.0),
                                             ),

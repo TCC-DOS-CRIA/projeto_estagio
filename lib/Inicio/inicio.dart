@@ -2,6 +2,7 @@ import 'package:clip_shadow/clip_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/home/home_page_cat.dart';
 import 'package:projeto_estagio/login/login.dart';
+import 'package:projeto_estagio/splash/splash_page.dart';
 
 import '../home/home_page.dart';
 
@@ -77,6 +78,7 @@ class _SplashScreenState extends State<Inicial> {
                     height: 50,
                     color: Color.fromARGB(255, 111, 174, 255),
                     onPressed: () {
+                              print(finalEmail);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -94,15 +96,6 @@ class _SplashScreenState extends State<Inicial> {
                 ),
                 const Spacer(),
                 //Skip Button
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Skip",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    )),
                 const Spacer(),
               ],
             ),

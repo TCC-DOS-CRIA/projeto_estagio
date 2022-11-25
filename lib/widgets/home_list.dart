@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
 import 'package:projeto_estagio/carrinho_model/carrinho_model.dart';
 import 'package:projeto_estagio/models/produto_model.dart';
@@ -23,6 +24,7 @@ class HomeList extends StatefulWidget {
 class _HomeListState extends State<HomeList> {
   int activeIndex = 0;
   int _currentIndex = 2;
+  var f = NumberFormat('##0.00', 'pt');
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -145,7 +147,7 @@ class _HomeListState extends State<HomeList> {
                                   height: 30,
                                 ),
                                 Text(
-                                  'R\$ ${produto.preco.toString()}',
+                                  'R\$ ${f.format(produto.preco)}',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontFamily: 'Gotham',

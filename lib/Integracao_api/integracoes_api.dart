@@ -6,6 +6,7 @@ import 'package:js/js.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:projeto_estagio/home/home.dart';
+import 'package:projeto_estagio/splash/splash_page.dart';
 
 import '../login/Login.dart';
 import '../models/produto_model.dart';
@@ -62,7 +63,11 @@ class Integracoes {
       HttpClient httpClient = new HttpClient();
       HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
       request.headers.set('content-type', 'application/json');
-      Map<String, Object> body = {"produtos": list, "preco": preco, "email":emailUsu};
+      Map<String, Object> body = {
+        "produtos": list,
+        "preco": preco,
+        "email": emailUsu
+      };
       request.add(utf8.encode(json.encode(body)));
       HttpClientResponse response = await request.close();
       String reply = await response.transform(utf8.decoder).join();
@@ -146,6 +151,12 @@ class Integracoes {
 
   @override
   static Future<Usuario_model> buscarUsuario() async {
+    if (finalEmail == null) {
+      
+    }
+    else {
+          emailUsu = finalEmail;
+    }
     try {
       final Response response = await _dio.get(
           'https://app-projetosestagio-api.herokuapp.com/usuarios/e/$emailUsu');
@@ -154,6 +165,8 @@ class Integracoes {
       print(a);
       return a;
     } catch (e) {
+      print(emailUsu);
+      print(finalEmail);
       print(e);
       throw Exception("Erro ao trazer usuarios");
     }
@@ -178,27 +191,27 @@ class Integracoes {
       print(e);
     }
   }
-  
+
   @override
   static Future<List<dynamic>> buscarPedidos() async {
-    var url =
-        Uri.parse('https://app-projetosestagio-api.herokuapp.com/pedidos/$emailUsu');
+    var url = Uri.parse(
+        'https://app-projetosestagio-api.herokuapp.com/pedidos/$emailUsu');
     var response = await http.get(url);
     if (response.statusCode == 200) {
-       List<dynamic> dados = jsonDecode(utf8.decode(response.bodyBytes));
-       return dados;
+      List<dynamic> dados = jsonDecode(utf8.decode(response.bodyBytes));
+      return dados;
     } else {
       throw Exception("Erro ao trazer usuarios");
     }
   }
 
-  static Future<List<dynamic>> buscarItens(dado)async {
-    var url =
-        Uri.parse('https://app-projetosestagio-api.herokuapp.com/itensVenda/$dado');
+  static Future<List<dynamic>> buscarItens(dado) async {
+    var url = Uri.parse(
+        'https://app-projetosestagio-api.herokuapp.com/itensVenda/$dado');
     var response = await http.get(url);
     if (response.statusCode == 200) {
-       List<dynamic> dados = jsonDecode(utf8.decode(response.bodyBytes));
-       return dados;
+      List<dynamic> dados = jsonDecode(utf8.decode(response.bodyBytes));
+      return dados;
     } else {
       throw Exception("Erro ao trazer usuarios");
     }

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:js/js.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,6 +28,7 @@ class _DetailPageState extends State<DetailPage> {
   var _firstScroll = true;
   bool _enabled = false;
   List<ProdutoModel> a = [];
+  var f = NumberFormat('##0.00', 'pt');
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +140,7 @@ class _DetailPageState extends State<DetailPage> {
                                             width: 10,
                                           ),
                                           Text(
-                                            'R\$ ${_.carrinho[key]!.preco.toInt()}',
+                                            'R\$ ${f.format(_.carrinho[key]!.preco)}',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontFamily: 'Gotham',
@@ -250,14 +252,14 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   Container(
                     alignment: Alignment.centerRight,
-                    padding: EdgeInsets.only(left: 120),
+                    padding: EdgeInsets.only(left: 95),
                     height: 70,
                     width: 400,
                     color: Colors.grey[200],
                     child: Row(
                       children: <Widget>[
                         Text(
-                          'Total: R\$${_.valorTotal().toInt()}',
+                          'Total: R\$${f.format(_.valorTotal())}',
                           style: TextStyle(
                             fontFamily: 'Gotham',
                             fontSize: 30,

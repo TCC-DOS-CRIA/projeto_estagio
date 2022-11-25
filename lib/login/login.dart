@@ -10,6 +10,7 @@ import 'package:projeto_estagio/models/usuario_model.dart';
 import 'package:projeto_estagio/perfil/perfil.dart';
 import 'package:projeto_estagio/widgets/home_list.dart';
 import 'package:projeto_estagio/Inicio/inicio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Cadastro/Cadastro.dart';
 
@@ -33,7 +34,10 @@ class LoginPage extends StatelessWidget {
               child: Text(
                 'Bem vindo!',
                 textAlign: TextAlign.left,
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 35, fontWeight: FontWeight.w400),
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 35,
+                    fontWeight: FontWeight.w400),
               ),
             ),
             SizedBox(
@@ -44,8 +48,10 @@ class LoginPage extends StatelessWidget {
                 width: 200,
                 child: Text('Faça login para continuar',
                     textAlign: TextAlign.left,
-                    style:
-                        TextStyle(fontFamily: 'Poppins', fontSize: 21, fontWeight: FontWeight.w300))),
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 21,
+                        fontWeight: FontWeight.w300))),
             SizedBox(
               height: 55,
             ),
@@ -122,12 +128,15 @@ class LoginPage extends StatelessWidget {
                               }
                               switch (deuCerto) {
                                 case 1:
+                                  final SharedPreferences sharedPreferences =
+                                      await SharedPreferences.getInstance();
+                                  sharedPreferences.setString('email', _emailController.text);                                 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
                                               "Login realizado com sucesso",
-                                               style: TextStyle(
-                                              fontFamily: 'Gotham')),
+                                              style: TextStyle(
+                                                  fontFamily: 'Gotham')),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -143,12 +152,13 @@ class LoginPage extends StatelessWidget {
                                   });
                                   break;
                                 case 0:
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content:
-                                              Text("Email ou senha inválidos", style: TextStyle(
-                                                fontFamily: 'Gotham'
-                                              ),),
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                          content: Text(
+                                            "Email ou senha inválidos",
+                                            style:
+                                                TextStyle(fontFamily: 'Gotham'),
+                                          ),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -160,8 +170,8 @@ class LoginPage extends StatelessWidget {
                                       SnackBar(
                                           content: Text(
                                               "Redirecionando para cadastro de nova senha",
-                                               style: TextStyle(
-                                                fontFamily: 'Gotham')),
+                                              style: TextStyle(
+                                                  fontFamily: 'Gotham')),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -186,8 +196,9 @@ class LoginPage extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
-                                              "Erro ao autenticar usuário", style: TextStyle(
-                                                fontFamily: 'Gotham')),
+                                              "Erro ao autenticar usuário",
+                                              style: TextStyle(
+                                                  fontFamily: 'Gotham')),
                                           action: SnackBarAction(
                                             label: "",
                                             onPressed: () {},
@@ -198,7 +209,8 @@ class LoginPage extends StatelessWidget {
                           },
                           child: Text(
                             'Entrar',
-                            style: TextStyle(fontFamily: 'Gotham', fontSize: 17),
+                            style:
+                                TextStyle(fontFamily: 'Gotham', fontSize: 17),
                           ),
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -217,7 +229,8 @@ class LoginPage extends StatelessWidget {
                       child: TextButton(
                           child: Text(
                             'Esqueceu a senha?',
-                            style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                            style:
+                                TextStyle(fontFamily: 'Poppins', fontSize: 18),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -243,13 +256,19 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Text(
                         'Não possui conta?',
-                        style: TextStyle(fontFamily: 'Poppins', fontSize: 12, color: Color.fromARGB(221, 0, 0, 0)),
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            color: Color.fromARGB(221, 0, 0, 0)),
                       ),
                       InkWell(
                           child: Text(
                             'Clique aqui para se cadastrar',
                             textAlign: TextAlign.right,
-                            style: TextStyle(fontFamily: 'Poppins', fontSize: 12,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
                           ),
                           onTap: () => Navigator.push(
                               context,

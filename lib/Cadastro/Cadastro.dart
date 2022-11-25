@@ -1,9 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/Resource/Strings.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/login/login.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+
+class Tradutor implements FlutterPwValidatorStrings {
+  @override
+  final String atLeast = 'Pelo menos - caracteres';
+  final String normalLetters = "- Letter";
+  final String uppercaseLetters = "- Uppercase letter";
+  final String numericCharacters = "- Numeric character";
+  final String specialCharacters = "- Special character";
+}
 
 class Cadastro extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -39,7 +49,10 @@ class Cadastro extends StatelessWidget {
             child: Text(
               'Cadastro',
               textAlign: TextAlign.left,
-              style: TextStyle(fontFamily: 'Poppins', fontSize: 35, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 35,
+                  fontWeight: FontWeight.w400),
             ),
           ),
           SizedBox(
@@ -48,7 +61,11 @@ class Cadastro extends StatelessWidget {
           SizedBox(
             child: Text("Crie uma nova conta",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Color.fromARGB(255, 53, 51, 51), fontWeight: FontWeight.w300)),
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 53, 51, 51),
+                    fontWeight: FontWeight.w300)),
           ),
           SizedBox(
             height: 30,
@@ -114,8 +131,9 @@ class Cadastro extends StatelessWidget {
                           if (EmailValidator.validate(value) == false) {
                             return 'Email inválido';
                           }
-                          if(auxEmail == true){
-                            _emailController.text ="";
+                          if (auxEmail == true) {
+                            _emailController.text = "";
+                            auxEmail = false;
                             return 'Email já cadastrado';
                           }
                           return null;
@@ -192,10 +210,8 @@ class Cadastro extends StatelessWidget {
                       minLength: 6,
                       width: 300,
                       height: 40,
-                      onSuccess: () {
-                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                            content: new Text("Senha válida")));
-                      },
+                      strings: Tradutor(),
+                      onSuccess: () {},
                       onFail: () {
                         print("Senha inválida");
                       },
@@ -236,7 +252,6 @@ class Cadastro extends StatelessWidget {
                           return null;
                         }),
                   ),
-                  
                   SizedBox(
                     height: 30,
                     width: 180,
@@ -265,46 +280,54 @@ class Cadastro extends StatelessWidget {
                                   _emailController.text,
                                   _passwordController.text,
                                   _phoneController.text);
-                                  
+
                               switch (a) {
                                 case 1:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            "Cadastro realizado com sucesso"),
-                                        action: SnackBarAction(
-                                          label: "",
-                                          onPressed: () {},
-                                        )));
-                                Future.delayed(Duration(seconds: 1), () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              new LoginPage()));
-                                });
-                                break;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              "Cadastro realizado com sucesso"),
+                                          action: SnackBarAction(
+                                            label: "",
+                                            onPressed: () {},
+                                          )));
+                                  Future.delayed(Duration(seconds: 1), () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                new LoginPage()));
+                                  });
+                                  break;
                                 case 0:
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            "Erro ao cadastrar usuário"),
-                                        action: SnackBarAction(
-                                          label: "",
-                                          onPressed: () {},
-                                        )));
-                                Future.delayed(Duration(seconds: 1), () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              new LoginPage()));
-                                });
-                                break;
+                                      SnackBar(
+                                          content:
+                                              Text("Erro ao cadastrar usuário"),
+                                          action: SnackBarAction(
+                                            label: "",
+                                            onPressed: () {},
+                                          )));
+                                  Future.delayed(Duration(seconds: 1), () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                new LoginPage()));
+                                  });
+                                  break;
                                 case -1:
                                   auxEmail = true;
-                                break;
+                                  break;
                               }
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      content: Text("Senhas diferentes"),
+                                      action: SnackBarAction(
+                                        label: "",
+                                        onPressed: () {},
+                                      )));
                             }
                           }
                         },

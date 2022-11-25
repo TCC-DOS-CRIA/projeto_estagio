@@ -3,10 +3,13 @@ import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
 import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
 import 'package:projeto_estagio/appBar/AppBar.dart';
 import 'package:projeto_estagio/home/home_page.dart';
+import 'package:projeto_estagio/login/login.dart';
 import 'package:projeto_estagio/models/usuario_model.dart';
+import 'package:projeto_estagio/splash/splash_page.dart';
 import 'package:projeto_estagio/widgets/home_list.dart';
 import 'package:projeto_estagio/widgets/meusdados.dart';
 import 'package:projeto_estagio/widgets/notif.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key, this.u}) : super(key: key);
@@ -42,7 +45,10 @@ class _PerfilState extends State<Perfil> {
           centerTitle: true,
           title: Text(
             'MEU PERFIL',
-            style: TextStyle(fontFamily: 'Gotham', color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontFamily: 'Gotham',
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
           elevation: 0,
           backgroundColor: fundo,
@@ -89,7 +95,9 @@ class _PerfilState extends State<Perfil> {
                       padding: const EdgeInsets.only(top: 1, bottom: 32),
                       child: Text(
                         usuario!.email,
-                        style: TextStyle(fontFamily: 'Poppins', color: Color.fromARGB(146, 0, 0, 0)),
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Color.fromARGB(146, 0, 0, 0)),
                       ),
                     ),
                   ],
@@ -124,7 +132,7 @@ class _PerfilState extends State<Perfil> {
                             Text(
                               'Notificações',
                               style: TextStyle(
-                                fontFamily: 'Gotham',
+                                  fontFamily: 'Gotham',
                                   color: Colors.black87,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
@@ -166,16 +174,20 @@ class _PerfilState extends State<Perfil> {
                         Column(
                           children: <Widget>[
                             IconButton(
-                              icon: Icon(Icons.description_outlined,
-                              color: Colors.black,
-                            ),
-                            onPressed: () async {
-                              List<dynamic> dados = await Integracoes.buscarPedidos();
-                              print(dados);
+                              icon: Icon(
+                                Icons.description_outlined,
+                                color: Colors.black,
+                              ),
+                              onPressed: () async {
+                                List<dynamic> dados =
+                                    await Integracoes.buscarPedidos();
+                                print(dados);
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Dados(usuario!,dados)),);
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Dados(usuario!, dados)),
+                                );
                               },
                             )
                           ],
@@ -186,7 +198,7 @@ class _PerfilState extends State<Perfil> {
                             Text(
                               'Meus Dados',
                               style: TextStyle(
-                                fontFamily: 'Gotham',
+                                  fontFamily: 'Gotham',
                                   color: Colors.black87,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
@@ -206,25 +218,93 @@ class _PerfilState extends State<Perfil> {
                           children: <Widget>[
                             IconButton(
                               icon: Icon(
-                              Icons.arrow_forward_ios_sharp,
-                              color: Colors.grey,
-                              size: 25,
+                                Icons.arrow_forward_ios_sharp,
+                                color: Colors.grey,
+                                size: 25,
                               ),
-                              onPressed: () async{
-                                List<dynamic> dados = await Integracoes.buscarPedidos();
+                              onPressed: () async {
+                                List<dynamic> dados =
+                                    await Integracoes.buscarPedidos();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Dados(usuario!,dados)));
+                                        builder: (context) =>
+                                            Dados(usuario!, dados)));
                               },
                             ),
-                            
                           ],
                         ),
                       ],
                     ),
                     Divider(),
-                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.black,
+                              ),
+                              onPressed: () async {
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.remove('email');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SplashPage()));
+                              },
+                            )
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Sair da Conta',
+                              style: TextStyle(
+                                  fontFamily: 'Gotham',
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            Text(
+                              'Desconectar minha conta',
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: Colors.grey[400],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                Icons.arrow_forward_ios_sharp,
+                                color: Colors.grey,
+                                size: 25,
+                              ),
+                              onPressed: () async {
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.remove('email');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SplashPage()));
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               )

@@ -38,7 +38,7 @@ class _State extends State<Dados> {
       backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Notificações', style: TextStyle(fontFamily: 'Gotham'),),
+          title: const Text('Meus Dados', style: TextStyle(fontFamily: 'Gotham'),),
           backgroundColor: fundo,
           ),
         body: GestureDetector(
