@@ -23,7 +23,7 @@ Future<void> main() async {
       var words = s.split('/');
       List<dynamic> itensPedido = await Integracoes.buscarItens(words[1]);
       String produtos = '';
-      itensPedido.forEach((element) {produtos += element[1]+' ';});
+      itensPedido.forEach((element) {produtos += element[1]+' - ';});
       if (finalEmail == words[0]) {
         if (words[2] == 'CONCLUIR') {
           NotificationApi.showNotification(

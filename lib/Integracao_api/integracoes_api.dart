@@ -66,7 +66,7 @@ class Integracoes {
       Map<String, Object> body = {
         "produtos": list,
         "preco": preco,
-        "email": emailUsu
+        "email": finalEmail
       };
       request.add(utf8.encode(json.encode(body)));
       HttpClientResponse response = await request.close();
