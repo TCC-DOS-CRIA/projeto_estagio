@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_estagio/Integracao_api/integracoes_api.dart';
-class Home extends StatefulWidget {
+import 'package:projeto_estagio/Pesquisa/pesquisa.dart';
+import 'package:projeto_estagio/appBar/AppBar.dart';
 
+class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
+
+  static void setState() {}
 }
 
 class _HomeState extends State<Home> {
+  int activeIndex = 0;
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List>(
-        future: Integracoes.buscarUsuarios(),
-        builder: (context, snapshot){
-          if(snapshot.hasError){
-            return Center(child: Text('Erro ao carregar usuarios'),
-            );
-          }
-          if(snapshot.hasData){
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context,index){
-                return ListTile(
-                  title: Text(snapshot.data![index]['nome']),
-                );
-              });
-          }
-
-          return Center(child: CircularProgressIndicator(),);
-        },
+      bottomNavigationBar: BottomNavBar(
+        tabIndex: _currentIndex,
+        onSelectedTab: _selectedIndex,
       ),
     );
+  }
+
+  void _selectedIndex(int index) {
+    setState(() => _currentIndex =
+        index); // Mandamos a variável por SetState() para fazer uma navegação dinâmica
+    // Assim não precisamos recarregar as peginas quando for chamada na BottomAppBar
   }
 }
